@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07121f">
+<meta name="description" content="Conheça o Rosenbauer Panther 4x4 AP-2 do SESCINC em uma experiência interativa.">
+<link rel="icon" href="assets/simbolos/prevencao-combate-fab.webp">
+<title>Rosenbauer Panther 4×4 | SESCINC</title>
+<style>
+:root{--navy:#07121f;--navy2:#0d2034;--card:#10283f;--yellow:#ffc400;--blue:#43b6e6;--red:#ef3b2d;--text:#f6f8fb;--muted:#b7c4d1;--line:#27425a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--navy);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overflow-x:hidden}
+button,a{font:inherit}button{-webkit-tap-highlight-color:transparent}img{max-width:100%;display:block}.wrap{width:min(1120px,100%);margin:auto;padding:0 18px}
+.top{position:sticky;top:0;z-index:30;background:#07121fe8;backdrop-filter:blur(12px);border-bottom:1px solid #ffffff18}
+.topin{height:62px;display:flex;align-items:center;gap:12px}.brand{display:flex;align-items:center;gap:9px;font-weight:900;min-width:0}.brand img{width:38px;height:38px;object-fit:contain}.brand span{white-space:nowrap}
+.nav{margin-left:auto;display:flex;gap:5px;overflow:auto;scrollbar-width:none}.nav a{color:white;text-decoration:none;padding:11px 10px;border-radius:10px;white-space:nowrap;font-size:.88rem}
+.hero{position:relative;min-height:560px;display:grid;align-items:end;background:linear-gradient(180deg,#07121f22 20%,#07121ff4 92%),url('assets/fotos/foto-13.webp') center/cover no-repeat}
+.hero-inner{padding:120px 18px 42px;width:min(1120px,100%);margin:auto}.unit{display:flex;align-items:center;gap:10px;color:var(--yellow);font-weight:850;letter-spacing:.08em;text-transform:uppercase}.unit img{width:52px;height:52px;object-fit:contain}
+h1{font-size:clamp(2.7rem,12vw,6rem);line-height:.88;margin:14px 0}h1 em{display:block;font-style:normal;color:var(--yellow)}.lead{font-size:clamp(1.05rem,3vw,1.35rem);max-width:720px;color:#e6edf4}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:24px}.hero-stat{background:#06101bd9;border:1px solid #ffffff22;border-radius:15px;padding:12px}.hero-stat b{display:block;color:var(--yellow);font-size:1.25rem}.hero-stat small{color:var(--muted)}
+section{padding:52px 0}h2{font-size:clamp(2rem,7vw,3.4rem);line-height:1;margin:0 0 10px}.sub{color:var(--muted);margin:0 0 22px;max-width:760px}
+.component-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.component{padding:0;background:var(--card);color:white;border:1px solid var(--line);border-radius:18px;overflow:hidden;text-align:left;cursor:pointer;min-width:0}.component img{width:100%;aspect-ratio:4/3;object-fit:cover;background:white}.component span{display:block;padding:13px}.component b,.component strong,.component small{display:block}.component strong{color:var(--yellow);font-size:1.35rem;margin:3px 0}.component small{color:var(--muted)}
+.numbers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.num{padding:18px;background:linear-gradient(145deg,#102b45,#0a1b2c);border:1px solid var(--line);border-radius:18px}.num strong{display:block;color:var(--yellow);font-size:clamp(1.8rem,5vw,3rem)}.num span{color:var(--muted)}
+.gallery-shell{position:relative}.carousel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:3px 2px 14px;scrollbar-width:none}.slide{flex:0 0 min(78vw,520px);scroll-snap-align:center;border:0;padding:0;border-radius:18px;overflow:hidden;background:#111;cursor:zoom-in}.slide img{width:100%;aspect-ratio:4/3;object-fit:cover}.hint{color:var(--muted);font-size:.88rem}
+.flood-section{background:linear-gradient(180deg,#0a1c2d,#07121f)}.flood-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:center}.flood-copy{padding:8px 0}.flood-copy .year{color:var(--yellow);font-size:4rem;font-weight:950;line-height:1}.flood-photos{display:grid;grid-template-columns:1fr 1fr;gap:10px}.flood-photo{border:0;padding:0;border-radius:16px;overflow:hidden;background:#111;cursor:zoom-in}.flood-photo img{width:100%;height:280px;object-fit:cover}
+.quiz{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px}.answers{display:grid;gap:9px}.ans{min-height:48px;border:1px solid #38546e;background:#091827;color:white;border-radius:12px;padding:12px;text-align:left}.ans:disabled{opacity:.75}#feedback{min-height:30px;font-weight:800;color:var(--yellow);margin-top:10px}
+.modal{display:none;position:fixed;inset:0;z-index:100;background:#02070cf2;padding:14px;align-items:center;justify-content:center}.modal.open{display:flex}.modal-card{width:min(760px,100%);max-height:92%;overflow:auto;background:#0b1b2b;border:1px solid var(--line);border-radius:20px}.modal-card>img{width:100%;max-height:54vh;object-fit:contain;background:#fff}.modal-body{padding:18px}.close{position:absolute;right:18px;top:18px;width:48px;height:48px;border:0;border-radius:50%;background:white;color:#111;font-size:28px;z-index:2}.modal-body h3{font-size:1.8rem;margin:0 0 7px}.modal-body .big{font-size:2rem;color:var(--yellow);font-weight:900}
+.photo-modal img{max-width:95vw;max-height:88vh;border-radius:14px;object-fit:contain}footer{border-top:1px solid var(--line);padding:30px 0 90px;color:var(--muted)}.foot{display:flex;gap:16px;align-items:center}.foot img{width:68px;height:68px;object-fit:contain}
+@media(max-width:760px){
+ .topin{height:56px}.brand span{font-size:.85rem}.brand img{width:34px;height:34px}.nav{display:none}
+ .hero{min-height:610px;background-position:58% center}.hero-inner{padding-bottom:28px}h1{font-size:clamp(3rem,16vw,4.7rem)}
+ .hero-stats{grid-template-columns:1fr 1fr}.component-grid{grid-template-columns:1fr 1fr;gap:9px}.component span{padding:10px}.component strong{font-size:1.15rem}
+ .numbers{grid-template-columns:1fr 1fr}.flood-grid{grid-template-columns:1fr}.flood-photos{grid-template-columns:1fr 1fr}.flood-photo img{height:190px}
+ section{padding:42px 0}.slide{flex-basis:86vw}.foot{align-items:flex-start}
+}
+@media(max-width:390px){.wrap{padding:0 14px}.hero-inner{padding-left:14px;padding-right:14px}.component-grid{grid-template-columns:1fr 1fr}.hero-stat{padding:10px}.hero-stat b{font-size:1.1rem}}
+
+.expo-final{padding:0 0 58px;background:radial-gradient(circle at 50% 0,#183653 0,#07121f 58%)}
+.expo-card{overflow:hidden;border:1px solid var(--line);border-radius:24px;background:#0b1b2b;box-shadow:0 20px 60px #0005}
+.expo-cover{width:100%;max-height:420px;object-fit:cover;object-position:center}
+.expo-content{padding:24px;text-align:center}
+.expo-logos{display:flex;align-items:center;justify-content:center;gap:16px;margin:-58px auto 14px;position:relative}
+.expo-logos img{width:92px;height:92px;object-fit:contain;background:#07121fe8;border:1px solid #ffffff24;border-radius:50%;padding:8px;box-shadow:0 10px 30px #0008}
+.expo-title{color:var(--yellow);font-weight:950;letter-spacing:.05em;text-transform:uppercase;margin:0 0 8px}
+.expo-message{font-size:clamp(1.35rem,4vw,2.2rem);font-weight:850;line-height:1.18;max-width:780px;margin:0 auto 10px}
+.expo-thanks{font-size:1.15rem;color:var(--muted);margin:0 0 22px}
+.team-photo{width:100%;border-radius:18px;cursor:zoom-in;aspect-ratio:4/3;object-fit:cover}
+@media(max-width:760px){.expo-final{padding-bottom:36px}.expo-card{border-radius:20px}.expo-cover{max-height:300px}.expo-content{padding:18px 14px}.expo-logos{margin-top:-48px}.expo-logos img{width:78px;height:78px}.team-photo{aspect-ratio:auto;max-height:none}}
+
+/* ===== Selfie EXPOAER 2026 ===== */
+.selfie-section{background:linear-gradient(180deg,#07121f,#0b2237);padding:54px 0}
+.selfie-intro{text-align:center;max-width:760px;margin:0 auto 22px}
+.selfie-stage{position:relative;width:min(100%,520px);margin:0 auto;border-radius:22px;overflow:hidden;background:#07121f;box-shadow:0 22px 65px #0008;border:1px solid #ffffff20;line-height:0}
+.selfie-stage .frame{position:relative;z-index:2;width:100%;height:auto;pointer-events:none}
+.selfie-camera{
+ position:absolute;z-index:3;
+ left:38.4%;top:20.9%;width:23.2%;height:16.6%;
+ object-fit:cover;background:#d9d9d9;
+ clip-path:ellipse(47% 49% at 50% 50%);
+ transform:scaleX(-1);
+}
+.selfie-placeholder{
+ position:absolute;z-index:3;left:38.4%;top:20.9%;width:23.2%;height:16.6%;
+ display:grid;place-items:center;clip-path:ellipse(47% 49% at 50% 50%);
+ background:linear-gradient(145deg,#e9e9e9,#bdbdbd);color:#25313b;
+ font-size:clamp(.55rem,2.4vw,.82rem);line-height:1.15;text-align:center;padding:10px;
+}
+.selfie-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px auto 0;width:min(100%,520px)}
+.selfie-btn{min-height:50px;border:0;border-radius:14px;padding:12px 18px;font-weight:900;cursor:pointer}
+.selfie-btn.primary{background:var(--yellow);color:#111}
+.selfie-btn.secondary{background:#17334d;color:#fff;border:1px solid #36556f}
+.selfie-note{color:var(--muted);font-size:.86rem;text-align:center;max-width:560px;margin:12px auto 0;line-height:1.45}
+.selfie-status{min-height:24px;color:var(--yellow);text-align:center;font-weight:750;margin-top:10px;line-height:1.3}
+@media(max-width:600px){
+ .selfie-section{padding:42px 0}.selfie-stage{border-radius:16px}
+ .selfie-actions{display:grid;grid-template-columns:1fr 1fr}.selfie-btn{padding:11px 9px}
+}
+
+
+/* ===== Navegação por seções: carrega/exibe somente o que o visitante escolher ===== */
+body.section-mode main > section:not(.hero){display:none}
+body.section-mode main > section.section-active{display:block;animation:sectionIn .28s ease}
+@keyframes sectionIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.section-home{display:block!important;padding:34px 0 54px}
+body.section-open .hero{display:none}
+body.section-open .section-home{display:none!important}
+.home-menu{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+.home-choice{min-height:108px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#102b45,#091927);color:white;padding:16px;text-align:left;cursor:pointer}
+.home-choice b{display:block;color:var(--yellow);font-size:1.1rem;margin-bottom:4px}.home-choice span{display:block;color:var(--muted);font-size:.9rem;line-height:1.3}
+.section-back{position:sticky;top:66px;z-index:15;display:flex;justify-content:flex-start;margin-bottom:18px}
+.section-back button{border:1px solid #ffffff24;background:#07121fe8;backdrop-filter:blur(8px);color:white;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer}
+.mobile-homebar{display:none}
+@media(max-width:760px){
+ .top .nav{display:none!important}
+ .home-menu{grid-template-columns:1fr 1fr}
+ .home-choice{min-height:112px;padding:14px}
+ body.section-open .mobile-homebar{display:flex;position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:60;justify-content:center;pointer-events:none}
+ .mobile-homebar button{pointer-events:auto;width:min(100%,420px);min-height:50px;border:0;border-radius:16px;background:var(--yellow);color:#111;font-weight:950;box-shadow:0 12px 35px #0009}
+ .section-back{top:62px}
+}
+
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap topin"><div class="brand"><img src="assets/simbolos/prevencao-combate-fab.webp" alt=""><span>SESCINC • PANTHER</span></div><nav class="nav"><a href="#explorar">Explorar</a><a href="#fotos">Fotos</a><a href="#enchente">Enchente 2024</a><a href="#quiz">Quiz</a><a href="#selfie">Selfie</a><a href="#expoaer">EXPOAER</a></nav></div></header>
+<main>
+<section class="hero"><div class="hero-inner">
+<div class="unit"><img src="assets/simbolos/sescinc-co.webp" alt="Símbolo SESCINC-CO"><span>Serviço de Salvamento e Combate a Incêndio</span></div>
+<h1>ROSENBAUER <em>PANTHER 4×4</em></h1>
+<p class="lead">Conheça de perto uma viatura de combate a incêndio aeroportuário feita para responder rápido, transportar grandes volumes de agentes extintores e atuar onde cada segundo importa.</p>
+<div class="hero-stats"><div class="hero-stat"><b>665 HP</b><small>potência</small></div><div class="hero-stat"><b>5.700 L</b><small>água</small></div><div class="hero-stat"><b>6.000 L/min</b><small>bomba</small></div><div class="hero-stat"><b>0–80 em 25 s</b><small>aceleração</small></div></div>
+</div></section>
+
+
+<section class="section-home" id="inicio">
+  <div class="wrap">
+    <h2>O que você quer conhecer?</h2>
+    <p class="sub">Escolha uma opção. A página abre somente a seção selecionada, deixando a navegação mais rápida e limpa no celular.</p>
+    <div class="home-menu">
+      <button class="home-choice" data-open-section="explorar"><b>🚒 Explore o Panther</b><span>Canhões, bomba, tanques, mangotinho e outros sistemas.</span></button>
+      <button class="home-choice" data-open-section="numeros"><b>📊 Números do Panther</b><span>Dimensões, capacidades e principais especificações.</span></button>
+      <button class="home-choice" data-open-section="fotos"><b>📷 Galeria</b><span>Veja as fotos da viatura e amplie em tela cheia.</span></button>
+      <button class="home-choice" data-open-section="enchente"><b>🌊 Enchente 2024</b><span>Imagens da atuação do efetivo nos resgates.</span></button>
+      <button class="home-choice" data-open-section="quiz"><b>🎯 Quiz</b><span>Teste o que você descobriu sobre o Panther.</span></button>
+      <button class="home-choice" data-open-section="selfie"><b>🤳 Selfie EXPOAER</b><span>Coloque seu rosto no bombeiro e salve a lembrança.</span></button>
+      <button class="home-choice" data-open-section="expoaer"><b>🛡️ Nosso time</b><span>Conheça o efetivo preparado para a EXPOAER 2026.</span></button>
+    </div>
+  </div>
+</section>
+
+<section id="explorar"><div class="section-back wrap"><button type="button" data-go-home>← Voltar ao início</button></div><div class="wrap"><h2>Explore o Panther</h2><p class="sub">Toque nos componentes para descobrir como cada sistema participa do combate a incêndio.</p><div class="component-grid">
+<button class="component" type="button" data-info="roof">
+  <img loading="lazy" src="assets/manual/canhao-superior.webp" alt="Canhão superior">
+  <span><b>Canhão superior</b><strong>3.028 L/min</strong><small>Alcance aproximado de 60 m</small></span>
+</button>
+
+<button class="component" type="button" data-info="front">
+  <img loading="lazy" src="assets/manual/canhao-frontal.webp" alt="Canhão frontal">
+  <span><b>Canhão frontal</b><strong>1.135 L/min</strong><small>Alcance máximo de 45 m</small></span>
+</button>
+
+<button class="component" type="button" data-info="pump">
+  <img loading="lazy" src="assets/manual/bomba-incendio.webp" alt="Bomba R600">
+  <span><b>Bomba R600</b><strong>6.000 L/min</strong><small>Bomba centrífuga de dois estágios</small></span>
+</button>
+
+<button class="component" type="button" data-info="tank">
+  <img loading="lazy" src="assets/manual/tanques.webp" alt="Água + LGE">
+  <span><b>Água + LGE</b><strong>5.700 + 757 L</strong><small>Reservatórios dos agentes extintores</small></span>
+</button>
+
+<button class="component" type="button" data-info="powder">
+  <img loading="lazy" src="assets/manual/sistema-pq.webp" alt="Pó químico">
+  <span><b>Pó químico</b><strong>227 kg</strong><small>Sistema hidroquímico</small></span>
+</button>
+
+<button class="component" type="button" data-info="disp">
+  <img loading="lazy" src="assets/manual/dispersadores.webp" alt="Dispersadores">
+  <span><b>Dispersadores</b><strong>6 unidades</strong><small>Proteção inferior ao redor da viatura</small></span>
+</button>
+
+<button class="component" type="button" data-info="hose">
+  <img loading="lazy" src="assets/manual/carretel.webp" alt="Mangotinho">
+  <span><b>Mangotinho</b><strong>33 m</strong><small>Água e espuma</small></span>
+</button>
+
+<button class="component" type="button" data-info="joy">
+  <img loading="lazy" src="assets/manual/joystick-canhao.webp" alt="Comando da cabine">
+  <span><b>Comando da cabine</b><strong>Joystick</strong><small>Controle do canhão superior</small></span>
+</button></div></div></section>
+
+<section id="numeros"><div class="section-back wrap"><button type="button" data-go-home>← Voltar ao início</button></div><div class="wrap"><h2>Gigante por todos os lados</h2><div class="numbers">
+<div class="num"><strong>10,34 m</strong><span>comprimento</span></div><div class="num"><strong>3,05 m</strong><span>largura</span></div><div class="num"><strong>3,72 m</strong><span>altura com corrimão</span></div><div class="num"><strong>23.977 kg</strong><span>peso bruto permitido</span></div><div class="num"><strong>757 L</strong><span>LGE</span></div><div class="num"><strong>30°</strong><span>ângulos de entrada e saída</span></div>
+</div></div></section>
+
+<section id="fotos"><div class="section-back wrap"><button type="button" data-go-home>← Voltar ao início</button></div><div class="wrap"><h2>Galeria</h2><p class="sub">Imagens do Panther e das viaturas do SESCINC. Deslize para o lado e toque em qualquer foto para ampliar.</p><div class="gallery-shell"><div class="carousel"><button class="slide" type="button" data-img="assets/fotos/foto-01.webp" aria-label="Ampliar foto 1"><img loading="lazy" src="assets/fotos/foto-01.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 1"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-02.webp" aria-label="Ampliar foto 2"><img loading="lazy" src="assets/fotos/foto-02.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 2"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-03.webp" aria-label="Ampliar foto 3"><img loading="lazy" src="assets/fotos/foto-03.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 3"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-04.webp" aria-label="Ampliar foto 4"><img loading="lazy" src="assets/fotos/foto-04.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 4"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-05.webp" aria-label="Ampliar foto 5"><img loading="lazy" src="assets/fotos/foto-05.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 5"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-06.webp" aria-label="Ampliar foto 6"><img loading="lazy" src="assets/fotos/foto-06.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 6"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-07.webp" aria-label="Ampliar foto 7"><img loading="lazy" src="assets/fotos/foto-07.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 7"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-08.webp" aria-label="Ampliar foto 8"><img loading="lazy" src="assets/fotos/foto-08.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 8"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-09.webp" aria-label="Ampliar foto 9"><img loading="lazy" src="assets/fotos/foto-09.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 9"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-10.webp" aria-label="Ampliar foto 10"><img loading="lazy" src="assets/fotos/foto-10.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 10"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-11.webp" aria-label="Ampliar foto 11"><img loading="lazy" src="assets/fotos/foto-11.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 11"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-12.webp" aria-label="Ampliar foto 12"><img loading="lazy" src="assets/fotos/foto-12.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 12"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-13.webp" aria-label="Ampliar foto 13"><img loading="lazy" src="assets/fotos/foto-13.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 13"></button></div></div><div class="hint">← deslize para explorar →</div></div></section>
+
+<section class="flood-section" id="enchente"><div class="wrap flood-grid"><div class="flood-copy"><div class="year">2024</div><h2>Enchente no Rio Grande do Sul</h2><p>Durante as enchentes de 2024, o Panther e o efetivo atuaram também em apoio aos resgates. A capacidade de deslocamento da viatura em áreas alagadas ajudou a levar equipes e apoiar pessoas em locais atingidos pela inundação.</p><p class="sub">Toque nas imagens para ampliar.</p></div><div class="flood-photos"><button class="flood-photo" type="button" data-img="assets/enchente/enchente-2024-01.webp"><img loading="lazy" src="assets/enchente/enchente-2024-01.webp" alt="Atuação durante as enchentes de 2024"></button>
+<button class="flood-photo" type="button" data-img="assets/enchente/enchente-2024-02.webp"><img loading="lazy" src="assets/enchente/enchente-2024-02.webp" alt="Atuação durante as enchentes de 2024"></button></div></div></section>
+
+<section id="quiz"><div class="section-back wrap"><button type="button" data-go-home>← Voltar ao início</button></div><div class="wrap"><h2>Teste seus conhecimentos</h2><div class="quiz"><div id="q"></div><div class="answers" id="answers"></div><div id="feedback" aria-live="polite"></div><button id="next" class="ans" style="display:none">Próxima pergunta →</button></div></div></section>
+
+
+<section class="selfie-section" id="selfie"><div class="section-back wrap"><button type="button" data-go-home>← Voltar ao início</button></div>
+  <div class="wrap">
+    <div class="selfie-intro">
+      <h2>Leve uma lembrança da EXPOAER</h2>
+      <p class="sub" style="margin-inline:auto">Ative a câmera frontal, enquadre seu rosto no capacete e registre sua foto como bombeiro por um dia.</p>
+    </div>
+    <div class="selfie-stage" id="selfieStage">
+      <div class="selfie-placeholder" id="selfiePlaceholder">Seu rosto<br>aparece aqui</div>
+      <video class="selfie-camera" id="selfieVideo" playsinline muted></video>
+      <img class="frame" id="selfieFrame" src="assets/selfie/moldura-selfie-expoaer-2026.webp" alt="Moldura de selfie EXPOAER 2026 com bombeiro e viaturas">
+    </div>
+    <div class="selfie-actions">
+      <button class="selfie-btn secondary" id="openCamera" type="button">📷 Ativar câmera</button>
+      <button class="selfie-btn primary" id="takeSelfie" type="button" disabled>● Tirar foto</button>
+    </div>
+    <div class="selfie-status" id="selfieStatus" aria-live="polite"></div>
+    <p class="selfie-note">A câmera só é usada no seu aparelho. A foto é montada no próprio navegador e não é enviada para o site. Em iPhone, após tocar em “Tirar foto”, use Compartilhar/Salvar Imagem se o navegador não fizer o download automaticamente.</p>
+    <canvas id="selfieCanvas" hidden></canvas>
+  </div>
+</section>
+
+<section class="expo-final" id="expoaer"><div class="section-back wrap"><button type="button" data-go-home>← Voltar ao início</button></div><div class="wrap">
+  <div class="expo-card">
+    <img class="expo-cover" loading="lazy" src="assets/expoaer/expoaer-2026.webp" alt="EXPOAER Canoas 2026">
+    <div class="expo-content">
+      <div class="expo-logos">
+        <img src="assets/simbolos/sescinc-co.webp" alt="Símbolo do SESCINC-CO">
+        <img src="assets/simbolos/prevencao-combate-fab.webp" alt="Prevenir, Combater, Salvar">
+      </div>
+      <div class="expo-title">EXPOAER 2026 • Canoas</div>
+      <p class="expo-message">Nosso time está pronto para garantir a sua segurança durante a EXPOAER 2026!</p>
+      <p class="expo-thanks">Obrigado pela visita!</p>
+      <button class="flood-photo" type="button" data-img="assets/expoaer/efetivo-sescinc-expoaer-2026.webp" style="width:100%">
+        <img class="team-photo" loading="lazy" src="assets/expoaer/efetivo-sescinc-expoaer-2026.webp" alt="Efetivo do SESCINC durante a EXPOAER 2026">
+      </button>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap foot"><img src="assets/simbolos/prevencao-combate-fab.webp" alt="Prevenir, Combater, Salvar"><div><b>Rosenbauer Panther 4×4 • SESCINC</b><br><span>Experiência interativa para apresentação pública da viatura.</span></div></div></footer>
+
+<div class="modal" id="componentModal" aria-hidden="true"><button class="close" data-close>×</button><div class="modal-card"><img id="mImg" alt=""><div class="modal-body"><h3 id="mTitle"></h3><div class="big" id="mBig"></div><p id="mText"></p></div></div></div>
+<div class="modal photo-modal" id="photoModal" aria-hidden="true"><button class="close" data-close>×</button><img id="fullImg" alt="Foto ampliada"></div>
+
+<script>
+const info={
+roof:['Canhão superior','3.028 L/min','assets/manual/canhao-superior.webp','Controle eletrônico por joystick, alcance aproximado de 60 m, rotação de 270° e seleção entre jato sólido e neblinado.'],
+front:['Canhão frontal','1.135 L/min','assets/manual/canhao-frontal.webp','Instalado na dianteira, trabalha a 10 bar e alcança até 45 m.'],
+pump:['Bomba Rosenbauer R600','6.000 L/min','assets/manual/bomba-incendio.webp','Bomba centrífuga de dois estágios que alimenta os principais sistemas de combate da viatura.'],
+tank:['Tanques de agentes extintores','5.700 L + 757 L','assets/manual/tanques.webp','A viatura transporta aproximadamente 5.700 litros de água e 757 litros de Líquido Gerador de Espuma (LGE).'],
+powder:['Sistema de pó químico','227 kg','assets/manual/sistema-pq.webp','O sistema hidroquímico utiliza pó químico pressurizado por nitrogênio e pode atuar em conjunto com água ou espuma.'],
+disp:['Dispersadores inferiores','6 unidades','assets/manual/dispersadores.webp','Seis dispersadores sob a viatura ajudam a criar uma área de proteção ao redor do CCI.'],
+hose:['Mangotinho','33 metros','assets/manual/carretel.webp','Mangotinho destinado à expedição de água e espuma, permitindo atuação manual próxima à viatura.'],
+joy:['Comando do canhão','Joystick','assets/manual/joystick-canhao.webp','O operador controla o canhão superior a partir da cabine, incluindo movimentação e padrão do jato.']
+};
+const cm=document.getElementById('componentModal');
+document.querySelectorAll('.component').forEach(b=>b.addEventListener('click',()=>{const d=info[b.dataset.info];mTitle.textContent=d[0];mBig.textContent=d[1];mImg.src=d[2];mImg.alt=d[0];mText.textContent=d[3];cm.classList.add('open');cm.setAttribute('aria-hidden','false')}));
+const pm=document.getElementById('photoModal'),fi=document.getElementById('fullImg');
+document.querySelectorAll('.slide,.flood-photo').forEach(b=>b.addEventListener('click',()=>{fi.src=b.dataset.img;pm.classList.add('open');pm.setAttribute('aria-hidden','false')}));
+function closeAll(){document.querySelectorAll('.modal.open').forEach(x=>{x.classList.remove('open');x.setAttribute('aria-hidden','true')});fi.src=''}
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closeAll));document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeAll()}));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+const quiz=[['Quantos litros de água o Panther transporta?',['3.000 L','5.700 L','8.000 L'],1],['Qual é a vazão da bomba R600?',['1.135 L/min','3.028 L/min','6.000 L/min'],2],['Qual é o alcance aproximado do canhão superior?',['30 m','45 m','60 m'],2],['Quanto pó químico é transportado?',['100 kg','227 kg','500 kg'],1]];
+let qi=0,score=0;const q=document.getElementById('q'),aa=document.getElementById('answers'),fb=document.getElementById('feedback'),nx=document.getElementById('next');
+function renderQ(){let x=quiz[qi];q.innerHTML=`<b>Pergunta ${qi+1} de ${quiz.length}</b><h3>${x[0]}</h3>`;aa.innerHTML='';fb.textContent='';nx.style.display='none';x[1].forEach((t,i)=>{let b=document.createElement('button');b.className='ans';b.textContent=t;b.onclick=()=>{[...aa.children].forEach(z=>z.disabled=true);if(i===x[2]){score++;fb.textContent='✓ Correto!'}else fb.textContent='Resposta: '+x[1][x[2]];nx.style.display='block'};aa.appendChild(b)})}
+nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você acertou ${score} de ${quiz.length}!</h3>`;aa.innerHTML='';fb.textContent=score===quiz.length?'Excelente! Você conhece o Panther.':'Explore a página e tente novamente.';nx.textContent='Refazer quiz';nx.style.display='block';nx.onclick=()=>location.reload()}};renderQ();
+
+/* ===== Câmera/selfie EXPOAER ===== */
+(() => {
+ const video=document.getElementById('selfieVideo');
+ const placeholder=document.getElementById('selfiePlaceholder');
+ const openBtn=document.getElementById('openCamera');
+ const takeBtn=document.getElementById('takeSelfie');
+ const status=document.getElementById('selfieStatus');
+ const canvas=document.getElementById('selfieCanvas');
+ const frame=document.getElementById('selfieFrame');
+ let stream=null;
+
+ async function openCamera(){
+   status.textContent='Solicitando acesso à câmera...';
+   try{
+     if(stream) stream.getTracks().forEach(t=>t.stop());
+     stream=await navigator.mediaDevices.getUserMedia({
+       video:{facingMode:{ideal:'user'},width:{ideal:1280},height:{ideal:1280}},
+       audio:false
+     });
+     video.srcObject=stream;
+     await video.play();
+     placeholder.style.display='none';
+     takeBtn.disabled=false;
+     openBtn.textContent='↻ Reiniciar câmera';
+     status.textContent='Enquadre seu rosto no capacete e toque em “Tirar foto”.';
+   }catch(err){
+     console.error(err);
+     status.textContent='Não foi possível acessar a câmera. Verifique a permissão do navegador e se o site está aberto por HTTPS.';
+   }
+ }
+
+ function drawCover(ctx, source, dx,dy,dw,dh, mirror=false){
+   const sw=source.videoWidth||source.naturalWidth, sh=source.videoHeight||source.naturalHeight;
+   const sr=sw/sh, dr=dw/dh;
+   let sx=0,sy=0,cw=sw,ch=sh;
+   if(sr>dr){cw=sh*dr;sx=(sw-cw)/2}else{ch=sw/dr;sy=(sh-ch)/2}
+   ctx.save();
+   if(mirror){ctx.translate(dx+dw,dy);ctx.scale(-1,1);ctx.drawImage(source,sx,sy,cw,ch,0,0,dw,dh)}
+   else ctx.drawImage(source,sx,sy,cw,ch,dx,dy,dw,dh);
+   ctx.restore();
+ }
+
+ async function takePhoto(){
+   if(!stream || !video.videoWidth){status.textContent='Ative a câmera primeiro.';return}
+   const W=frame.naturalWidth||1024, H=frame.naturalHeight||1536;
+   canvas.width=W; canvas.height=H;
+   const ctx=canvas.getContext('2d');
+
+   // Draw the poster first, then place the live face over the intentionally blank helmet opening.
+   ctx.drawImage(frame,0,0,W,H);
+
+   // Coordinates tuned to the face opening in the supplied EXPOAER frame.
+   const x=W*0.384, y=H*0.209, w=W*0.232, h=H*0.166;
+   ctx.save();
+   ctx.beginPath();
+   ctx.ellipse(x+w/2,y+h/2,w*.47,h*.49,0,0,Math.PI*2);
+   ctx.clip();
+   drawCover(ctx,video,x,y,w,h,true);
+   ctx.restore();
+
+   status.textContent='Preparando sua lembrança...';
+   canvas.toBlob(async blob=>{
+     if(!blob){status.textContent='Não foi possível gerar a foto.';return}
+     const file=new File([blob],'selfie-expoaer-2026.png',{type:'image/png'});
+     // On supported mobile browsers, sharing gives the most natural "save to photos" path.
+     if(navigator.canShare && navigator.canShare({files:[file]})){
+       try{
+         await navigator.share({files:[file],title:'Minha foto na EXPOAER 2026',text:'Minha lembrança da EXPOAER 2026'});
+         status.textContent='Foto pronta!';
+         return;
+       }catch(e){
+         if(e && e.name==='AbortError'){status.textContent='Foto pronta. Você pode tentar salvar novamente.';return}
+       }
+     }
+     const url=URL.createObjectURL(blob);
+     const a=document.createElement('a');
+     a.href=url;a.download='selfie-expoaer-2026.png';
+     document.body.appendChild(a);a.click();a.remove();
+     setTimeout(()=>URL.revokeObjectURL(url),3000);
+     status.textContent='Foto salva/baixada no aparelho.';
+   },'image/png',0.96);
+ }
+
+ openBtn.addEventListener('click',openCamera);
+ takeBtn.addEventListener('click',takePhoto);
+ window.addEventListener('pagehide',()=>{if(stream)stream.getTracks().forEach(t=>t.stop())});
+})();
+
+
+/* ===== Seções sob demanda ===== */
+(() => {
+ const selectable=['explorar','numeros','fotos','enchente','quiz','selfie','expoaer'];
+ document.body.classList.add('section-mode');
+
+ function deferSectionImages(){
+   selectable.forEach(id=>{
+     const sec=document.getElementById(id);
+     if(!sec) return;
+     sec.querySelectorAll('img[src]').forEach(img=>{
+       // Keep tiny identity assets if desired only when their section opens.
+       img.dataset.src=img.getAttribute('src');
+       img.removeAttribute('src');
+     });
+   });
+ }
+ function loadSectionImages(sec){
+   sec.querySelectorAll('img[data-src]').forEach(img=>{
+     img.src=img.dataset.src;
+     delete img.dataset.src;
+   });
+ }
+ function stopSelfieCamera(){
+   const v=document.getElementById('selfieVideo');
+   if(v && v.srcObject){
+     v.srcObject.getTracks().forEach(t=>t.stop());
+     v.srcObject=null;
+   }
+ }
+ function home(push=true){
+   stopSelfieCamera();
+   document.querySelectorAll('main > section.section-active').forEach(s=>s.classList.remove('section-active'));
+   document.body.classList.remove('section-open');
+   window.scrollTo({top:0,behavior:'smooth'});
+   if(push && location.hash) history.pushState({},'',location.pathname+location.search);
+ }
+ function openSection(id,push=true){
+   if(!selectable.includes(id)) return;
+   const sec=document.getElementById(id); if(!sec) return;
+   stopSelfieCamera();
+   document.querySelectorAll('main > section.section-active').forEach(s=>s.classList.remove('section-active'));
+   loadSectionImages(sec);
+   sec.classList.add('section-active');
+   document.body.classList.add('section-open');
+   if(push) history.pushState({section:id},'', '#'+id);
+   requestAnimationFrame(()=>window.scrollTo({top:0,behavior:'instant'}));
+ }
+ deferSectionImages();
+
+ document.querySelectorAll('[data-open-section]').forEach(b=>b.addEventListener('click',()=>openSection(b.dataset.openSection)));
+ document.querySelectorAll('[data-go-home]').forEach(b=>b.addEventListener('click',()=>home()));
+ document.querySelectorAll('.top .nav a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+   const id=a.getAttribute('href').slice(1);
+   if(selectable.includes(id)){e.preventDefault();openSection(id)}
+ }));
+ window.addEventListener('popstate',()=>{
+   const id=location.hash.slice(1);
+   if(selectable.includes(id)) openSection(id,false); else home(false);
+ });
+ const initial=location.hash.slice(1);
+ if(selectable.includes(initial)) openSection(initial,false);
+})();
+
+</script>
+<div class="mobile-homebar"><button type="button" data-go-home>⌂ Voltar ao menu</button></div>
+</body></html>
