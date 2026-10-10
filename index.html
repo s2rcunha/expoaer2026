@@ -57,7 +57,7 @@ section{padding:52px 0}h2{font-size:clamp(2rem,7vw,3.4rem);line-height:1;margin:
  left:38.4%;top:20.9%;width:23.2%;height:16.6%;
  object-fit:cover;background:#d9d9d9;
  clip-path:ellipse(47% 49% at 50% 50%);
- transform:scaleX(-1);
+ transform:scaleX(-1) scale(1.35); transform-origin:center;
 }
 .selfie-placeholder{
  position:absolute;z-index:3;left:38.4%;top:20.9%;width:23.2%;height:16.6%;
@@ -97,6 +97,45 @@ body.section-open .section-home{display:none!important}
  body.section-open .mobile-homebar{display:flex;position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:60;justify-content:center;pointer-events:none}
  .mobile-homebar button{pointer-events:auto;width:min(100%,420px);min-height:50px;border:0;border-radius:16px;background:var(--yellow);color:#111;font-weight:950;box-shadow:0 12px 35px #0009}
  .section-back{top:62px}
+}
+
+
+/* ===== Ajustes selfie V2 ===== */
+@media(max-width:760px){
+ body.section-open:has(#selfie.section-active){overflow:hidden}
+ #selfie.section-active{
+   position:fixed;inset:56px 0 0;z-index:55;
+   display:flex!important;flex-direction:column;
+   padding:6px 10px max(8px,env(safe-area-inset-bottom));
+   background:#07121f;overflow:hidden;
+ }
+ #selfie.section-active>.section-back{display:none}
+ #selfie.section-active>.wrap{
+   width:100%;height:100%;padding:0;
+   display:flex;flex-direction:column;min-height:0;
+ }
+ #selfie.section-active .selfie-intro{flex:0 0 auto;margin:0 auto 5px}
+ #selfie.section-active .selfie-intro h2{font-size:1.15rem;margin:0 0 2px}
+ #selfie.section-active .selfie-intro .sub{font-size:.76rem;line-height:1.2;margin:0}
+ #selfie.section-active .selfie-stage{
+   flex:1 1 auto;min-height:0;width:auto;max-width:100%;
+   aspect-ratio:2/3;margin:0 auto;border-radius:12px;
+ }
+ #selfie.section-active .selfie-stage .frame{height:100%;width:auto;max-width:100%;object-fit:contain;margin:auto}
+ #selfie.section-active .selfie-actions{
+   flex:0 0 auto;width:100%;max-width:520px;margin:6px auto 0;
+   grid-template-columns:1fr 1fr;gap:7px
+ }
+ #selfie.section-active .selfie-btn{min-height:42px;padding:8px 6px;font-size:.84rem}
+ #selfie.section-active .selfie-status{min-height:18px;margin:3px 0 0;font-size:.72rem}
+ #selfie.section-active .selfie-note{display:none}
+ body.section-open:has(#selfie.section-active) .mobile-homebar{
+   display:flex;left:auto;right:12px;bottom:auto;top:61px;width:auto
+ }
+ body.section-open:has(#selfie.section-active) .mobile-homebar button{
+   width:auto;min-height:36px;padding:7px 11px;border-radius:999px;font-size:.78rem;
+   background:#07121fe8;color:#fff;border:1px solid #ffffff30
+ }
 }
 
 </style>
@@ -296,6 +335,10 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
    const sr=sw/sh, dr=dw/dh;
    let sx=0,sy=0,cw=sw,ch=sh;
    if(sr>dr){cw=sh*dr;sx=(sw-cw)/2}else{ch=sw/dr;sy=(sh-ch)/2}
+   // Zoom digital para a selfie: usa a região central da câmera.
+   const zoom=1.35;
+   const zw=cw/zoom, zh=ch/zoom;
+   sx+=(cw-zw)/2; sy+=(ch-zh)/2; cw=zw; ch=zh;
    ctx.save();
    if(mirror){ctx.translate(dx+dw,dy);ctx.scale(-1,1);ctx.drawImage(source,sx,sy,cw,ch,0,0,dw,dh)}
    else ctx.drawImage(source,sx,sy,cw,ch,dx,dy,dw,dh);
@@ -411,6 +454,22 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
  const initial=location.hash.slice(1);
  if(selectable.includes(initial)) openSection(initial,false);
 })();
+
+
+/* ===== Correção robusta do botão Voltar ao menu ===== */
+document.addEventListener('click', function(e){
+  const back=e.target.closest('[data-go-home]');
+  if(!back) return;
+  e.preventDefault();
+  e.stopPropagation();
+  // Stop camera immediately.
+  const v=document.getElementById('selfieVideo');
+  if(v && v.srcObject){v.srcObject.getTracks().forEach(t=>t.stop());v.srcObject=null;}
+  document.querySelectorAll('main > section.section-active').forEach(s=>s.classList.remove('section-active'));
+  document.body.classList.remove('section-open');
+  history.pushState({},'',location.pathname+location.search);
+  window.scrollTo({top:0,behavior:'smooth'});
+}, true);
 
 </script>
 <div class="mobile-homebar"><button type="button" data-go-home>⌂ Voltar ao menu</button></div>
