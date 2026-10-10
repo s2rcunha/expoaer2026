@@ -57,7 +57,7 @@ section{padding:52px 0}h2{font-size:clamp(2rem,7vw,3.4rem);line-height:1;margin:
  left:38.4%;top:20.9%;width:23.2%;height:16.6%;
  object-fit:cover;background:#d9d9d9;
  clip-path:ellipse(47% 49% at 50% 50%);
- transform:scaleX(-1) scale(1.35); transform-origin:center;
+ transform:scaleX(-1); transform-origin:center;
 }
 .selfie-placeholder{
  position:absolute;z-index:3;left:38.4%;top:20.9%;width:23.2%;height:16.6%;
@@ -135,6 +135,53 @@ body.section-open .section-home{display:none!important}
  body.section-open:has(#selfie.section-active) .mobile-homebar button{
    width:auto;min-height:36px;padding:7px 11px;border-radius:999px;font-size:.78rem;
    background:#07121fe8;color:#fff;border:1px solid #ffffff30
+ }
+}
+
+
+/* Selfie V3: aproxima o rosto sem encolher o bombeiro */
+.selfie-camera{transform:scaleX(-1) scale(2)!important;transform-origin:center!important}
+@media(max-width:760px){
+ #selfie.section-active{
+   inset:56px 0 0;
+   padding:0 0 max(6px,env(safe-area-inset-bottom));
+ }
+ #selfie.section-active .selfie-intro{
+   display:none;
+ }
+ #selfie.section-active>.wrap{
+   display:grid;
+   grid-template-rows:minmax(0,1fr) auto auto;
+   gap:5px;
+   height:100%;
+ }
+ #selfie.section-active .selfie-stage{
+   width:100%;
+   height:100%;
+   max-width:none;
+   aspect-ratio:auto;
+   border-radius:0;
+   border-left:0;border-right:0;
+   margin:0;
+   overflow:hidden;
+ }
+ #selfie.section-active .selfie-stage .frame{
+   position:absolute;
+   left:50%;top:50%;
+   width:auto;height:100%;
+   max-width:none;
+   transform:translate(-50%,-50%);
+   object-fit:contain;
+ }
+ /* Camera coordinates follow the centered 2:3 poster occupying full stage height.
+    JS below recalculates exact screen coordinates on resize. */
+ #selfie.section-active .selfie-camera,
+ #selfie.section-active .selfie-placeholder{z-index:4}
+ #selfie.section-active .selfie-actions{
+   margin:0 auto;padding:0 8px;width:100%;
+ }
+ #selfie.section-active .selfie-status{
+   margin:0;padding:0 8px 2px;min-height:16px
  }
 }
 
@@ -336,7 +383,7 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
    let sx=0,sy=0,cw=sw,ch=sh;
    if(sr>dr){cw=sh*dr;sx=(sw-cw)/2}else{ch=sw/dr;sy=(sh-ch)/2}
    // Zoom digital para a selfie: usa a região central da câmera.
-   const zoom=1.35;
+   const zoom=2.0;
    const zw=cw/zoom, zh=ch/zoom;
    sx+=(cw-zw)/2; sy+=(ch-zh)/2; cw=zw; ch=zh;
    ctx.save();
@@ -470,6 +517,33 @@ document.addEventListener('click', function(e){
   history.pushState({},'',location.pathname+location.search);
   window.scrollTo({top:0,behavior:'smooth'});
 }, true);
+
+
+/* Selfie V3: mantém o recorte alinhado mesmo com o pôster ampliado */
+(() => {
+ const stage=document.getElementById('selfieStage');
+ const frame=document.getElementById('selfieFrame');
+ const video=document.getElementById('selfieVideo');
+ const ph=document.getElementById('selfiePlaceholder');
+ function alignFace(){
+   if(!stage||!frame||!video||!ph) return;
+   if(!document.getElementById('selfie')?.classList.contains('section-active')) return;
+   const sr=stage.getBoundingClientRect();
+   const naturalRatio=(frame.naturalWidth||1024)/(frame.naturalHeight||1536);
+   const fh=sr.height;
+   const fw=fh*naturalRatio;
+   const left=(sr.width-fw)/2;
+   const x=left+fw*.384, y=fh*.209, w=fw*.232, h=fh*.166;
+   [video,ph].forEach(el=>{
+     el.style.left=x+'px';el.style.top=y+'px';
+     el.style.width=w+'px';el.style.height=h+'px';
+   });
+ }
+ frame.addEventListener('load',alignFace);
+ window.addEventListener('resize',alignFace);
+ document.querySelectorAll('[data-open-section="selfie"]').forEach(b=>b.addEventListener('click',()=>setTimeout(alignFace,50)));
+ if(location.hash==='#selfie') setTimeout(alignFace,100);
+})();
 
 </script>
 <div class="mobile-homebar"><button type="button" data-go-home>⌂ Voltar ao menu</button></div>
