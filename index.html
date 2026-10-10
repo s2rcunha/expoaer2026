@@ -409,6 +409,32 @@ section,.wrap,.topin,.hero-inner,.component-grid,.number-grid,
   transform:none!important;
 }
 
+
+/* ===== V5.18 — câmera traseira, lente preferencial e zoom manual ===== */
+.selfie-camera.zoomed.rear-camera{
+  left:38.4%!important;
+  top:20.9%!important;
+  width:23.2%!important;
+  height:16.6%!important;
+  clip-path:ellipse(47% 49% at 50% 50%)!important;
+  transform:none!important;
+}
+.selfie-zoom-control{
+  display:none;
+  width:min(100%,520px);
+  margin:12px auto 0;
+  padding:12px 14px;
+  border:1px solid #ffffff24;
+  border-radius:16px;
+  background:#07121fcc;
+}
+.selfie-zoom-control.active{display:block}
+.selfie-zoom-row{display:flex;align-items:center;gap:12px}
+.selfie-zoom-row label{font-weight:800;white-space:nowrap}
+.selfie-zoom-row input[type="range"]{width:100%;min-width:0}
+.selfie-zoom-value{min-width:48px;text-align:right;font-weight:900}
+.selfie-zoom-hint{display:block;margin-top:7px;opacity:.76;font-size:.82rem;line-height:1.3}
+
 </style>
 </head>
 <body>
@@ -622,6 +648,14 @@ section,.wrap,.topin,.hero-inner,.component-grid,.number-grid,
       <button class="selfie-btn secondary" id="switchCamera" type="button" disabled>🔄 Câmera traseira</button>
       <button class="selfie-btn primary" id="takeSelfie" type="button" disabled>● Tirar foto</button>
     </div>
+    <div class="selfie-zoom-control" id="selfieZoomControl">
+      <div class="selfie-zoom-row">
+        <label for="selfieZoom">Zoom</label>
+        <input id="selfieZoom" type="range" min="1" max="4" step="0.1" value="2.2" aria-label="Zoom da câmera traseira">
+        <span class="selfie-zoom-value" id="selfieZoomValue">2.2×</span>
+      </div>
+      <small class="selfie-zoom-hint" id="selfieZoomHint">Ajuste a aproximação antes de tirar a foto.</small>
+    </div>
     <div class="selfie-status" id="selfieStatus" aria-live="polite"></div>
     <p class="selfie-note">A câmera só é usada no seu aparelho. A foto é montada no próprio navegador e não é enviada para o site. Em iPhone, após tocar em “Tirar foto”, use Compartilhar/Salvar Imagem se o navegador não fizer o download automaticamente.</p>
     <canvas id="selfieCanvas" hidden></canvas>
@@ -686,23 +720,92 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
  const canvas=document.getElementById('selfieCanvas');
  const frame=document.getElementById('selfieFrame');
  const switchBtn=document.getElementById('switchCamera');
+ const zoomControl=document.getElementById('selfieZoomControl');
+ const zoomSlider=document.getElementById('selfieZoom');
+ const zoomValue=document.getElementById('selfieZoomValue');
+ const zoomHint=document.getElementById('selfieZoomHint');
  let stream=null;
  let facing='user';
+ let rearZoom=2.2;
+ let hardwareZoom=false;
+ let hardwareZoomMin=1, hardwareZoomMax=1;
+
+
+ function updateZoomLabel(){
+   if(zoomValue) zoomValue.textContent=rearZoom.toFixed(1)+'×';
+ }
+
+ async function applyRearZoom(){
+   if(facing!=='environment' || !stream) return;
+   const track=stream.getVideoTracks()[0];
+   if(!track) return;
+   if(hardwareZoom){
+     const z=Math.max(hardwareZoomMin,Math.min(hardwareZoomMax,rearZoom));
+     try{
+       await track.applyConstraints({advanced:[{zoom:z}]});
+       rearZoom=z;
+     }catch(e){ console.warn('Zoom óptico/digital da câmera não pôde ser aplicado.',e); }
+   }
+   updateZoomLabel();
+ }
+
+ async function configureRearZoom(){
+   hardwareZoom=false;
+   hardwareZoomMin=1; hardwareZoomMax=1;
+   if(facing!=='environment' || !stream) return;
+   const track=stream.getVideoTracks()[0];
+   const caps=track && track.getCapabilities ? track.getCapabilities() : {};
+   if(caps && caps.zoom && Number.isFinite(caps.zoom.min) && Number.isFinite(caps.zoom.max) && caps.zoom.max>caps.zoom.min){
+     hardwareZoom=true;
+     hardwareZoomMin=caps.zoom.min;
+     hardwareZoomMax=caps.zoom.max;
+     rearZoom=Math.max(hardwareZoomMin,Math.min(hardwareZoomMax,rearZoom));
+     zoomSlider.min=hardwareZoomMin;
+     zoomSlider.max=hardwareZoomMax;
+     zoomSlider.step=caps.zoom.step || 0.1;
+     zoomSlider.value=rearZoom;
+     zoomHint.textContent='Zoom da câmera disponível neste aparelho. Ajuste antes de tirar a foto.';
+     await applyRearZoom();
+   }else{
+     zoomSlider.min=1;
+     zoomSlider.max=4;
+     zoomSlider.step=0.1;
+     rearZoom=Math.max(1,Math.min(4,rearZoom));
+     zoomSlider.value=rearZoom;
+     zoomHint.textContent='Este aparelho não expõe o zoom da lente ao navegador; o ajuste será aplicado ao enquadramento e à foto.';
+     updateZoomLabel();
+   }
+ }
 
  async function startCamera(){
    status.textContent=facing==='user'?'Abrindo câmera frontal...':'Abrindo câmera traseira...';
    try{
      if(stream) stream.getTracks().forEach(t=>t.stop());
      video.srcObject=null;
-     stream=await navigator.mediaDevices.getUserMedia({
-       video:{facingMode:{ideal:facing},width:{ideal:1280},height:{ideal:1280}},
-       audio:false
-     });
+     let videoConstraints={facingMode:{ideal:facing},width:{ideal:1920},height:{ideal:1080}};
+     if(facing==='environment' && navigator.mediaDevices.enumerateDevices){
+       try{
+         // Primeiro pedimos permissão para que os rótulos das câmeras fiquem disponíveis.
+         const probe=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
+         probe.getTracks().forEach(t=>t.stop());
+         const cams=(await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind==='videoinput');
+         const rear=cams.filter(d=>/back|rear|environment|traseir/i.test(d.label));
+         // Em celulares com várias lentes, evitamos explicitamente ultra-wide quando o nome é exposto.
+         const preferred=(rear.find(d=>!/ultra|wide|0\.5|macro/i.test(d.label)) || rear[0]);
+         if(preferred) videoConstraints={deviceId:{exact:preferred.deviceId},width:{ideal:1920},height:{ideal:1080}};
+       }catch(e){ console.warn('Seleção avançada da câmera traseira indisponível; usando facingMode.',e); }
+     }
+     stream=await navigator.mediaDevices.getUserMedia({video:videoConstraints,audio:false});
      video.srcObject=stream;
      await video.play();
      video.classList.add('zoomed');
      video.classList.toggle('rear-camera', facing==='environment');
      video.style.transform = facing==='user' ? 'scaleX(-1)' : 'none';
+     zoomControl.classList.toggle('active', facing==='environment');
+     if(facing==='environment'){
+       await configureRearZoom();
+       if(!hardwareZoom) video.style.transform='scale('+rearZoom+')';
+     }
      placeholder.style.display='none';
      takeBtn.disabled=false;
      switchBtn.disabled=false;
@@ -733,7 +836,7 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
    // Mantém a moldura/bombeiro exatamente como na primeira versão.
    // A traseira usa zoom maior para que a pessoa possa ficar mais afastada do celular.
    // A frontal preserva exatamente o enquadramento já aprovado.
-   const zoom = facing==='environment' ? 2.20 : 1.55;
+   const zoom = facing==='environment' ? (hardwareZoom ? 1 : rearZoom) : 1.55;
    const zw=cw/zoom, zh=ch/zoom;
    sx+=(cw-zw)/2; sy+=(ch-zh)/2; cw=zw; ch=zh;
    ctx.save();
@@ -783,7 +886,20 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
    },'image/png',0.96);
  }
 
- openBtn.addEventListener('click',openCamera);
+
+ zoomSlider.addEventListener('input', async ()=>{
+   rearZoom=parseFloat(zoomSlider.value)||1;
+   updateZoomLabel();
+   if(hardwareZoom){
+     await applyRearZoom();
+     video.style.transform='none';
+   }else if(facing==='environment'){
+     // O recorte elíptico permanece idêntico; ampliamos somente a imagem da câmera.
+     video.style.transform='scale('+rearZoom+')';
+   }
+ });
+
+  openBtn.addEventListener('click',openCamera);
  switchBtn.addEventListener('click',switchCamera);
  takeBtn.addEventListener('click',takePhoto);
  window.addEventListener('pagehide',()=>{if(stream)stream.getTracks().forEach(t=>t.stop())});
