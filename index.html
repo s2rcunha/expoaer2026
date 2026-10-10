@@ -273,9 +273,65 @@ main,section,.section-home,.expo-final,.selfie-section{width:100%;max-width:100%
 /* V5.5 */
 .youtube-shell{width:min(100%,430px);aspect-ratio:9/16;margin:0 auto;overflow:hidden;border-radius:18px;background:#000;border:1px solid var(--line);box-shadow:0 14px 40px #0005}
 .youtube-shell iframe{display:block;width:100%;height:100%;border:0}
-.engine-card img{aspect-ratio:4/3;object-fit:cover}
-.component-kicker{display:inline-block;margin-bottom:5px;font-size:.65rem;font-weight:900;letter-spacing:.12em;color:var(--yellow)}
 @media(max-width:600px){.youtube-shell{width:min(100%,360px);border-radius:14px}}
+
+/* ===== V5.9 — correção definitiva do card do motor ===== */
+.component-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+}
+.component-grid > .component{
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  grid-column:auto!important;
+  justify-self:stretch!important;
+  overflow:hidden!important;
+}
+.component-grid > .component img{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  height:auto!important;
+  aspect-ratio:4/3!important;
+  object-fit:cover!important;
+}
+@media(max-width:760px){
+  .component-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+
+
+/* ===== V5.12 — identificação correta do sistema de PQ ===== */
+.component-grid > .component-pq img{
+  object-position:center 58%!important;
+}
+
+
+/* ===== V5.14 — botão Tirar Foto dentro da própria moldura ===== */
+.selfie-frame-shutter{
+ position:absolute;
+ z-index:5;
+ left:64.5%;
+ top:77%;
+ width:35.5%;
+ height:21%;
+ border:0;
+ padding:0;
+ margin:0;
+ background:transparent;
+ cursor:pointer;
+ -webkit-tap-highlight-color:transparent;
+ touch-action:manipulation;
+}
+.selfie-frame-shutter:disabled{cursor:default}
+.selfie-frame-shutter:focus-visible{
+ outline:3px solid #fff;
+ outline-offset:-5px;
+ border-radius:16px;
+}
+
 </style>
 </head>
 <body>
@@ -320,14 +376,18 @@ main,section,.section-home,.expo-final,.selfie-section{width:100%;max-width:100%
   <img loading="lazy" src="assets/manual/bomba-incendio.webp" alt="Bomba R600">
   <span><b>Bomba R600</b><strong>6.000 L/min</strong><small>Bomba centrífuga de dois estágios</small></span>
 </button>
+<button class="component" type="button" data-info="pumpcomp">
+  <img loading="lazy" src="assets/manual/sistema-pq.webp" alt="Compartimento de controle externo da estrutura de combate a incêndio">
+  <span><b>Compartimento de controle</b><strong>Operação externa</strong><small>Controle da estrutura de combate a incêndio</small></span>
+</button>
 
 <button class="component" type="button" data-info="tank">
   <img loading="lazy" src="assets/manual/tanques.webp" alt="Água + LGE">
   <span><b>Água + LGE</b><strong>5.700 + 757 L</strong><small>Reservatórios dos agentes extintores</small></span>
 </button>
 
-<button class="component" type="button" data-info="powder">
-  <img loading="lazy" src="assets/manual/sistema-pq.webp" alt="Pó químico">
+<button class="component component-pq" type="button" data-info="powder">
+  <img loading="lazy" src="assets/manual/sistema-pq-detalhes.webp" alt="Pó químico">
   <span><b>Pó químico</b><strong>227 kg</strong><small>Sistema hidroquímico</small></span>
 </button>
 
@@ -344,7 +404,12 @@ main,section,.section-home,.expo-final,.selfie-section{width:100%;max-width:100%
 <button class="component" type="button" data-info="joy">
   <img loading="lazy" src="assets/manual/joystick-canhao.webp" alt="Comando da cabine">
   <span><b>Comando da cabine</b><strong>Joystick</strong><small>Controle do canhão superior</small></span>
-</button></div><article class="component-card engine-card" data-img="assets/manual/motor-detroit.webp"><img loading="lazy" src="assets/manual/motor-detroit.webp" alt="Motor Detroit Diesel do Rosenbauer Panther"><div class="component-card-copy"><span class="component-kicker">MOTOR</span><h3>Detroit Diesel • 665 HP</h3><p>O conjunto Detroit Diesel entrega 665 HP de potência ao Panther, garantindo força para deslocar a viatura e operar seus sistemas.</p><small>Toque para ampliar</small></div></article></div></section>
+</button>
+<button class="component" type="button" data-info="engine">
+  <img loading="lazy" src="assets/manual/motor-detroit.webp" alt="Motor Detroit Diesel">
+  <span><b>Motor Detroit Diesel</b><strong>665 HP</strong><small>Potência para deslocamento e operação dos sistemas</small></span>
+</button>
+</div></div></section>
 
 <section id="numeros">
   <div class="section-back wrap"><button type="button" data-go-home>← Voltar ao início</button></div>
@@ -472,6 +537,8 @@ main,section,.section-home,.expo-final,.selfie-section{width:100%;max-width:100%
       <div class="selfie-placeholder" id="selfiePlaceholder">Seu rosto<br>aparece aqui</div>
       <video class="selfie-camera" id="selfieVideo" playsinline muted></video>
       <img class="frame" id="selfieFrame" src="assets/selfie/moldura-selfie-expoaer-2026.webp" alt="Moldura de selfie EXPOAER 2026 com bombeiro e viaturas">
+      <button class="selfie-frame-shutter" id="frameShutter" type="button"
+ aria-label="Tirar foto pela imagem" title="Tirar foto"></button>
     </div>
     <div class="selfie-actions">
       <button class="selfie-btn secondary" id="openCamera" type="button">📷 Ativar câmera</button>
@@ -511,10 +578,12 @@ main,section,.section-home,.expo-final,.selfie-section{width:100%;max-width:100%
 <script>
 const info={
 roof:['Canhão superior','3.028 L/min','assets/manual/canhao-superior.webp','Controle eletrônico por joystick, alcance aproximado de 60 m, rotação de 270° e seleção entre jato sólido e neblinado.'],
+engine:['Motor Detroit Diesel','665 HP','assets/manual/motor-detroit.webp','Motor Detroit Diesel com 665 HP de potência, responsável por fornecer a força necessária para o deslocamento da viatura e operação de seus sistemas.'],
 front:['Canhão frontal','1.135 L/min','assets/manual/canhao-frontal.webp','Instalado na dianteira, trabalha a 10 bar e alcança até 45 m.'],
 pump:['Bomba Rosenbauer R600','6.000 L/min','assets/manual/bomba-incendio.webp','Bomba centrífuga de dois estágios que alimenta os principais sistemas de combate da viatura.'],
+pumpcomp:['Compartimento de controle','Operação externa','assets/manual/sistema-pq.webp','Neste compartimento ficam os controles externos da estrutura de combate a incêndio. Ele permite operar os sistemas externamente e também possibilita a operação em modo emergencial em caso de falhas elétricas.'],
 tank:['Tanques de agentes extintores','5.700 L + 757 L','assets/manual/tanques.webp','A viatura transporta aproximadamente 5.700 litros de água e 757 litros de Líquido Gerador de Espuma (LGE).'],
-powder:['Sistema de pó químico','227 kg','assets/manual/sistema-pq.webp','O sistema hidroquímico utiliza pó químico pressurizado por nitrogênio e pode atuar em conjunto com água ou espuma.'],
+powder:['Sistema de pó químico','227 kg','assets/manual/sistema-pq-detalhes.webp','Tanque de pó químico com capacidade de 500 libras (227 kg), pressurizado por nitrogênio. O sistema trabalha a 200 PSI (14 kgf/cm²) e possui válvulas de pressurização, segurança, limpeza, redução de pressão e abertura do PQ.'],
 disp:['Dispersadores inferiores','6 unidades','assets/manual/dispersadores.webp','Seis dispersadores sob a viatura ajudam a criar uma área de proteção ao redor do CCI.'],
 hose:['Mangotinho','33 metros','assets/manual/carretel.webp','Mangotinho destinado à expedição de água e espuma, permitindo atuação manual próxima à viatura.'],
 joy:['Comando do canhão','Joystick','assets/manual/joystick-canhao.webp','O operador controla o canhão superior a partir da cabine, incluindo movimentação e padrão do jato.']
@@ -720,4 +789,28 @@ document.addEventListener('click',function(e){
 
 </script>
 <div class="mobile-homebar"><button type="button" data-go-home>⌂ Voltar ao menu</button></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const frameShutter = document.getElementById('frameShutter');
+  const takeSelfie = document.getElementById('takeSelfie');
+  if (!frameShutter || !takeSelfie) return;
+
+  function syncFrameShutter(){
+    frameShutter.disabled = takeSelfie.disabled;
+    frameShutter.setAttribute('aria-disabled', String(takeSelfie.disabled));
+  }
+
+  frameShutter.addEventListener('click', function(){
+    if (!takeSelfie.disabled) takeSelfie.click();
+  });
+
+  syncFrameShutter();
+  new MutationObserver(syncFrameShutter).observe(takeSelfie, {
+    attributes:true,
+    attributeFilter:['disabled']
+  });
+});
+</script>
+
 </body></html>
