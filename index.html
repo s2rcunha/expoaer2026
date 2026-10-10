@@ -127,6 +127,14 @@ body.section-open .section-home{display:none!important}
   body.section-open:has(#selfie.section-active) .mobile-homebar{display:none!important}
 }
 
+
+/* ===== Alternância câmera frontal / traseira ===== */
+.selfie-actions{display:grid!important;grid-template-columns:1fr 1fr 1fr!important}
+@media(max-width:600px){
+ .selfie-actions{grid-template-columns:1fr 1fr!important}
+ #takeSelfie{grid-column:1/-1}
+}
+
 </style>
 </head>
 <body>
@@ -234,6 +242,7 @@ body.section-open .section-home{display:none!important}
     </div>
     <div class="selfie-actions">
       <button class="selfie-btn secondary" id="openCamera" type="button">📷 Ativar câmera</button>
+      <button class="selfie-btn secondary" id="switchCamera" type="button" disabled>🔄 Câmera traseira</button>
       <button class="selfie-btn primary" id="takeSelfie" type="button" disabled>● Tirar foto</button>
     </div>
     <div class="selfie-status" id="selfieStatus" aria-live="polite"></div>
@@ -297,27 +306,42 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
  const status=document.getElementById('selfieStatus');
  const canvas=document.getElementById('selfieCanvas');
  const frame=document.getElementById('selfieFrame');
+ const switchBtn=document.getElementById('switchCamera');
  let stream=null;
+ let facing='user';
 
- async function openCamera(){
-   status.textContent='Solicitando acesso à câmera...';
+ async function startCamera(){
+   status.textContent=facing==='user'?'Abrindo câmera frontal...':'Abrindo câmera traseira...';
    try{
      if(stream) stream.getTracks().forEach(t=>t.stop());
+     video.srcObject=null;
      stream=await navigator.mediaDevices.getUserMedia({
-       video:{facingMode:{ideal:'user'},width:{ideal:1280},height:{ideal:1280}},
+       video:{facingMode:{ideal:facing},width:{ideal:1280},height:{ideal:1280}},
        audio:false
      });
      video.srcObject=stream;
      await video.play();
      video.classList.add('zoomed');
+     video.style.transform = facing==='user' ? 'scaleX(-1)' : 'none';
      placeholder.style.display='none';
      takeBtn.disabled=false;
+     switchBtn.disabled=false;
      openBtn.textContent='↻ Reiniciar câmera';
-     status.textContent='Enquadre seu rosto no capacete e toque em “Tirar foto”.';
+     switchBtn.textContent=facing==='user'?'🔄 Câmera traseira':'🔄 Câmera frontal';
+     status.textContent=facing==='user'
+       ? 'Câmera frontal ativa. Enquadre o rosto no capacete.'
+       : 'Câmera traseira ativa. Enquadre a pessoa no capacete.';
    }catch(err){
      console.error(err);
-     status.textContent='Não foi possível acessar a câmera. Verifique a permissão do navegador e se o site está aberto por HTTPS.';
+     status.textContent='Não foi possível acessar esta câmera. Verifique a permissão do navegador.';
    }
+ }
+
+ async function openCamera(){ await startCamera(); }
+
+ async function switchCamera(){
+   facing = facing==='user' ? 'environment' : 'user';
+   await startCamera();
  }
 
  function drawCover(ctx, source, dx,dy,dw,dh, mirror=false){
@@ -351,7 +375,7 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
    ctx.beginPath();
    ctx.ellipse(x+w/2,y+h/2,w*.47,h*.49,0,0,Math.PI*2);
    ctx.clip();
-   drawCover(ctx,video,x,y,w,h,true);
+   drawCover(ctx,video,x,y,w,h,facing==='user');
    ctx.restore();
 
    status.textContent='Preparando sua lembrança...';
@@ -378,6 +402,7 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
  }
 
  openBtn.addEventListener('click',openCamera);
+ switchBtn.addEventListener('click',switchCamera);
  takeBtn.addEventListener('click',takePhoto);
  window.addEventListener('pagehide',()=>{if(stream)stream.getTracks().forEach(t=>t.stop())});
 })();
