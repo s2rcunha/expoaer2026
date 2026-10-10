@@ -396,6 +396,19 @@ section,.wrap,.topin,.hero-inner,.component-grid,.number-grid,
   .number-hero-side{grid-template-columns:1fr 1fr!important}
 }
 
+
+/* ===== V5.17 — câmera traseira: enquadramento mais próximo =====
+   A frontal mantém o ajuste existente. A traseira recebe zoom maior
+   para fotografar outra pessoa a uma distância confortável. */
+.selfie-camera.zoomed.rear-camera{
+  width:51.35%!important;
+  height:36.76%!important;
+  left:24.33%!important;
+  top:10.82%!important;
+  clip-path:ellipse(21.2% 22.1% at 50% 50%)!important;
+  transform:none!important;
+}
+
 </style>
 </head>
 <body>
@@ -688,6 +701,7 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
      video.srcObject=stream;
      await video.play();
      video.classList.add('zoomed');
+     video.classList.toggle('rear-camera', facing==='environment');
      video.style.transform = facing==='user' ? 'scaleX(-1)' : 'none';
      placeholder.style.display='none';
      takeBtn.disabled=false;
@@ -696,7 +710,7 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
      switchBtn.textContent=facing==='user'?'🔄 Câmera traseira':'🔄 Câmera frontal';
      status.textContent=facing==='user'
        ? 'Câmera frontal ativa. Enquadre o rosto no capacete.'
-       : 'Câmera traseira ativa. Enquadre a pessoa no capacete.';
+       : 'Câmera traseira ativa com aproximação. Mantenha a pessoa a uma distância confortável e enquadre o rosto no capacete.';
    }catch(err){
      console.error(err);
      status.textContent='Não foi possível acessar esta câmera. Verifique a permissão do navegador.';
@@ -717,7 +731,9 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
    if(sr>dr){cw=sh*dr;sx=(sw-cw)/2}else{ch=sw/dr;sy=(sh-ch)/2}
    // Zoom moderado somente no enquadramento da câmera.
    // Mantém a moldura/bombeiro exatamente como na primeira versão.
-   const zoom=1.55;
+   // A traseira usa zoom maior para que a pessoa possa ficar mais afastada do celular.
+   // A frontal preserva exatamente o enquadramento já aprovado.
+   const zoom = facing==='environment' ? 2.20 : 1.55;
    const zw=cw/zoom, zh=ch/zoom;
    sx+=(cw-zw)/2; sy+=(ch-zh)/2; cw=zw; ch=zh;
    ctx.save();
