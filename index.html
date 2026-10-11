@@ -500,10 +500,16 @@ code,pre,.technical-break{
 }
 .share-panther:active{transform:scale(.98)}
 .share-status{text-align:center;min-height:1.4em;margin-top:7px;font-size:.88rem;opacity:.82}
+.home-3d{margin:24px auto 0;width:min(100%,820px)}
+.sketchfab-embed-wrapper{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#050b12;box-shadow:0 14px 40px #0005}
+.sketchfab-embed-wrapper iframe{display:block;width:100%;height:460px;border:0}
+.sketchfab-credit{margin:8px 0 0;color:var(--muted);font-size:.8rem;line-height:1.35;text-align:center}
+.sketchfab-credit a{color:#ffd21a;font-weight:900;text-decoration:none}
 @media(max-width:430px){
   .selfie-zoom-row{gap:7px}
   .selfie-zoom-step{flex-basis:34px;width:34px;height:34px}
   .selfie-zoom-value{min-width:42px}
+  .sketchfab-embed-wrapper iframe{height:340px}
 }
 
 
@@ -675,6 +681,12 @@ footer .foot{
       <button class="home-choice" data-open-section="quiz"><b>🎯 Quiz</b><span>Teste o que você descobriu sobre o Panther.</span></button>
       
       <button class="home-choice" data-open-section="expoaer"><b>🛡️ Nosso time</b><span>Conheça o efetivo preparado para a EXPOAER 2026.</span></button>
+    </div>
+    <div class="home-3d">
+      <div class="sketchfab-embed-wrapper">
+        <iframe title="panther" loading="lazy" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/07e00c1bd5884708bdb5385881d4a677/embed"></iframe>
+      </div>
+      <p class="sketchfab-credit"><a href="https://sketchfab.com/3d-models/panther-07e00c1bd5884708bdb5385881d4a677" target="_blank" rel="nofollow noopener">panther</a> by <a href="https://sketchfab.com/rcunhalrc" target="_blank" rel="nofollow noopener">rcunhalrc</a> on <a href="https://sketchfab.com" target="_blank" rel="nofollow noopener">Sketchfab</a></p>
     </div>
     <button class="share-panther" id="sharePanther" type="button">↗ Compartilhar o Panther</button>
     <div class="share-status" id="shareStatus" aria-live="polite"></div>
