@@ -14,7 +14,7 @@ button,a{font:inherit}button{-webkit-tap-highlight-color:transparent}img{max-wid
 .top{position:sticky;top:0;z-index:30;background:#07121fe8;backdrop-filter:blur(12px);border-bottom:1px solid #ffffff18}
 .topin{height:62px;display:flex;align-items:center;gap:12px}.brand{display:flex;align-items:center;gap:9px;font-weight:900;min-width:0}.brand img{width:38px;height:38px;object-fit:contain}.brand span{white-space:nowrap}
 .nav{margin-left:auto;display:flex;gap:5px;overflow:auto;scrollbar-width:none}.nav a{color:white;text-decoration:none;padding:11px 10px;border-radius:10px;white-space:nowrap;font-size:.88rem}
-.hero{position:relative;min-height:560px;display:grid;align-items:end;background:linear-gradient(180deg,#07121f22 20%,#07121ff4 92%),url('assets/fotos/foto-13.webp') center/cover no-repeat}
+.hero{position:relative;min-height:560px;display:grid;align-items:end;background:linear-gradient(180deg,#07121f22 20%,#07121ff4 92%),url('assets/fotos/foto-10.webp') center/cover no-repeat}
 .hero-inner{padding:120px 18px 42px;width:min(1120px,100%);margin:auto}.unit{display:flex;align-items:center;gap:10px;color:var(--yellow);font-weight:850;letter-spacing:.08em;text-transform:uppercase}.unit img{width:52px;height:52px;object-fit:contain}
 h1{font-size:clamp(2.7rem,12vw,6rem);line-height:.88;margin:14px 0}h1 em{display:block;font-style:normal;color:var(--yellow)}.lead{font-size:clamp(1.05rem,3vw,1.35rem);max-width:720px;color:#e6edf4}
 .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:24px}.hero-stat{background:#06101bd9;border:1px solid #ffffff22;border-radius:15px;padding:12px}.hero-stat b{display:block;color:var(--yellow);font-size:1.25rem}.hero-stat small{color:var(--muted)}
@@ -434,6 +434,29 @@ section,.wrap,.topin,.hero-inner,.component-grid,.number-grid,
 .selfie-zoom-row input[type="range"]{width:100%;min-width:0}
 .selfie-zoom-value{min-width:48px;text-align:right;font-weight:900}
 .selfie-zoom-hint{display:block;margin-top:7px;opacity:.76;font-size:.82rem;line-height:1.3}
+
+
+/* ===== V5.20 — não cortar palavras entre linhas ===== */
+p,h1,h2,h3,h4,h5,h6,span,b,strong,small,a,button,.sub,
+.component-grid>.component span,
+.component-grid>.component b,
+.component-grid>.component strong,
+.component-grid>.component small,
+.number-card p,.number-equivalent,
+.number-hero-side span,
+.selfie-btn{
+  overflow-wrap:normal!important;
+  word-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+}
+
+/* Somente sequências técnicas realmente indivisíveis podem quebrar para
+   impedir estouro horizontal, sem afetar palavras comuns. */
+code,pre,.technical-break{
+  overflow-wrap:anywhere!important;
+  word-break:break-word!important;
+}
 
 </style>
 </head>
