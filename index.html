@@ -458,13 +458,29 @@ code,pre,.technical-break{
   word-break:break-word!important;
 }
 
+
+/* ===== V5.22 — texto institucional do hero: amarelo com contorno vermelho ===== */
+.hero-service-title{
+  color:#ffd21a!important;
+  -webkit-text-stroke:1.5px #b20d16;
+  paint-order:stroke fill;
+  text-shadow:
+    -1px -1px 0 #b20d16,
+     1px -1px 0 #b20d16,
+    -1px  1px 0 #b20d16,
+     1px  1px 0 #b20d16;
+}
+@media(max-width:600px){
+  .hero-service-title{-webkit-text-stroke:1.25px #b20d16}
+}
+
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap topin"><div class="brand"><img src="assets/simbolos/prevencao-combate-fab.webp" alt=""><span>SESCINC • PANTHER</span></div><nav class="nav"><a href="#explorar">Explorar</a><a href="#fotos">Fotos</a><a href="#enchente">Enchente 2024</a><a href="#quiz">Quiz</a><a href="#selfie">Selfie</a><a href="#expoaer">EXPOAER</a></nav></div></header>
 <main>
 <section class="hero"><div class="hero-inner">
-<div class="unit"><img src="assets/simbolos/sescinc-co.webp" alt="Símbolo SESCINC-CO"><span>Serviço de Salvamento e Combate a Incêndio</span></div>
+<div class="unit"><img src="assets/simbolos/sescinc-co.webp" alt="Símbolo SESCINC-CO"><span class="hero-service-title">Serviço de Salvamento e Combate a Incêndio</span></div>
 <h1>ROSENBAUER <em>PANTHER 4×4</em></h1>
 <p class="lead">Conheça de perto uma viatura de combate a incêndio aeroportuário feita para responder rápido, transportar grandes volumes de agentes extintores e atuar onde cada segundo importa.</p>
 <div class="hero-stats"><div class="hero-stat"><b>665 HP</b><small>potência</small></div><div class="hero-stat"><b>5.700 L</b><small>água</small></div><div class="hero-stat"><b>6.000 L/min</b><small>bomba</small></div><div class="hero-stat"><b>0–80 em 25 s</b><small>aceleração</small></div></div>
