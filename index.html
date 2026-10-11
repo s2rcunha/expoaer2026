@@ -25,7 +25,7 @@ section{padding:52px 0}h2{font-size:clamp(2rem,7vw,3.4rem);line-height:1;margin:
 .flood-section{background:linear-gradient(180deg,#0a1c2d,#07121f)}.flood-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:center}.flood-copy{padding:8px 0}.flood-copy .year{color:var(--yellow);font-size:4rem;font-weight:950;line-height:1}.flood-photos{display:grid;grid-template-columns:1fr 1fr;gap:10px}.flood-photo{border:0;padding:0;border-radius:16px;overflow:hidden;background:#111;cursor:zoom-in}.flood-photo img{width:100%;height:280px;object-fit:cover}
 .quiz{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px}.answers{display:grid;gap:9px}.ans{min-height:48px;border:1px solid #38546e;background:#091827;color:white;border-radius:12px;padding:12px;text-align:left}.ans:disabled{opacity:.75}#feedback{min-height:30px;font-weight:800;color:var(--yellow);margin-top:10px}
 .modal{display:none;position:fixed;inset:0;z-index:100;background:#02070cf2;padding:14px;align-items:center;justify-content:center}.modal.open{display:flex}.modal-card{width:min(760px,100%);max-height:92%;overflow:auto;background:#0b1b2b;border:1px solid var(--line);border-radius:20px}.modal-card>img{width:100%;max-height:54vh;object-fit:contain;background:#fff}.modal-body{padding:18px}.close{position:absolute;right:18px;top:18px;width:48px;height:48px;border:0;border-radius:50%;background:white;color:#111;font-size:28px;z-index:2}.modal-body h3{font-size:1.8rem;margin:0 0 7px}.modal-body .big{font-size:2rem;color:var(--yellow);font-weight:900}
-.photo-modal img{max-width:95vw;max-height:88vh;border-radius:14px;object-fit:contain}footer{border-top:1px solid var(--line);padding:30px 0 90px;color:var(--muted)}.foot{display:flex;gap:16px;align-items:center}.foot img{width:68px;height:68px;object-fit:contain}
+.photo-modal img{max-width:95vw;max-height:88vh;border-radius:14px;object-fit:contain}footer{border-top:1px solid var(--line);padding:30px 0 90px;color:var(--muted)}.foot{display:flex;gap:16px;align-items:center}.foot img{width:68px;height:68px;object-fit:contain}.visit-counter{display:none;margin-top:10px;color:#ffd21a;font-weight:900}.visit-counter.is-visible{display:block}.visit-counter small{display:block;color:var(--muted);font-size:.78rem;font-weight:700;margin-top:2px}
 @media(max-width:760px){
  .topin{height:56px}.brand span{font-size:.85rem}.brand img{width:34px;height:34px}.nav{display:none}
  .hero{min-height:610px;background-position:58% center}.hero-inner{padding-bottom:28px}h1{font-size:clamp(3rem,16vw,4.7rem)}
@@ -273,6 +273,8 @@ main,section,.section-home,.expo-final,.selfie-section{width:100%;max-width:100%
 /* V5.5 */
 .youtube-shell{width:min(100%,430px);aspect-ratio:9/16;margin:0 auto;overflow:hidden;border-radius:18px;background:#000;border:1px solid var(--line);box-shadow:0 14px 40px #0005}
 .youtube-shell iframe{display:block;width:100%;height:100%;border:0}
+.panther-operation-video{margin:24px auto 0}
+.panther-operation-video h3{margin:0 0 12px;font-size:1.2rem;color:var(--yellow)}
 @media(max-width:600px){.youtube-shell{width:min(100%,360px);border-radius:14px}}
 
 /* ===== V5.9 — correção definitiva do card do motor ===== */
@@ -725,7 +727,7 @@ footer .foot{
   <img loading="lazy" src="assets/manual/motor-detroit.webp" alt="Motor Detroit Diesel">
   <span><b>Motor Detroit Diesel</b><strong>665 HP</strong><small>Potência para deslocamento e operação dos sistemas</small></span>
 </button>
-</div></div></section>
+</div><div class="panther-operation-video"><h3>Veja o Panther em operação!</h3><div class="youtube-shell"><iframe src="https://www.youtube-nocookie.com/embed/tAm4k7APKHA?rel=0" title="Veja o Panther em operação" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div></div></section>
 
 <section id="numeros">
   
@@ -835,7 +837,10 @@ footer .foot{
 <button class="slide" type="button" data-img="assets/fotos/foto-10.webp" aria-label="Ampliar foto 10"><img loading="lazy" src="assets/fotos/foto-10.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 10"></button>
 <button class="slide" type="button" data-img="assets/fotos/foto-11.webp" aria-label="Ampliar foto 11"><img loading="lazy" src="assets/fotos/foto-11.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 11"></button>
 <button class="slide" type="button" data-img="assets/fotos/foto-12.webp" aria-label="Ampliar foto 12"><img loading="lazy" src="assets/fotos/foto-12.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 12"></button>
-<button class="slide" type="button" data-img="assets/fotos/foto-13.webp" aria-label="Ampliar foto 13"><img loading="lazy" src="assets/fotos/foto-13.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 13"></button><button class="slide" type="button" data-img="assets/fotos/foto-14.webp"><img loading="lazy" src="assets/fotos/foto-14.webp" alt="Rosenbauer Panther com equipamentos de combate a incêndio"></button></div></div><div class="hint">← deslize para explorar →</div></div></section>
+<button class="slide" type="button" data-img="assets/fotos/foto-13.webp" aria-label="Ampliar foto 13"><img loading="lazy" src="assets/fotos/foto-13.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 13"></button><button class="slide" type="button" data-img="assets/fotos/foto-14.webp"><img loading="lazy" src="assets/fotos/foto-14.webp" alt="Rosenbauer Panther com equipamentos de combate a incêndio"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-15.webp" aria-label="Ampliar foto 15"><img loading="lazy" src="assets/fotos/foto-15.webp" alt="Caminhão de resgate amarelo na Base Aérea de Canoas ao pôr do sol"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-16.webp" aria-label="Ampliar foto 16"><img loading="lazy" src="assets/fotos/foto-16.webp" alt="Caça em hangar com piso molhado e reflexo"></button>
+<button class="slide" type="button" data-img="assets/fotos/foto-17.webp" aria-label="Ampliar foto 17"><img loading="lazy" src="assets/fotos/foto-17.webp" alt="Caminhão ARFF amarelo ao pôr do sol"></button></div></div><div class="hint">← deslize para explorar →</div></div></section>
 
 <section class="flood-section" id="enchente"><div class="wrap flood-grid"><div class="flood-copy"><div class="year">2024</div><h2>Enchente no Rio Grande do Sul</h2><p>Durante as enchentes de 2024, o Panther e o efetivo do SESCINC-CO atuaram também em apoio aos resgates. A capacidade de deslocamento da viatura em áreas alagadas ajudou a levar equipes e apoiar pessoas em locais atingidos pela inundação. Só no primeiro dia removemos cerca de 300 pessoas dos bairros Mathias Velho, Harmonia e Mato Grande.</p><p class="sub">Toque nas imagens para ampliar.</p></div><div class="flood-photos"><button class="flood-photo" type="button" data-img="assets/enchente/enchente-2024-01.webp"><img loading="lazy" src="assets/enchente/enchente-2024-01.webp" alt="Atuação durante as enchentes de 2024"></button>
 <button class="flood-photo" type="button" data-img="assets/enchente/enchente-2024-02.webp"><img loading="lazy" src="assets/enchente/enchente-2024-02.webp" alt="Atuação durante as enchentes de 2024"></button></div></div><div class="flood-video-block"><h3>🎥 Enchente 2024 em vídeo</h3><div class="youtube-shell"><iframe src="https://www.youtube-nocookie.com/embed/Yv9OmzixAS0?rel=0" title="Enchente no Rio Grande do Sul — 2024" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p>Registros da atuação durante as enchentes de 2024 no Rio Grande do Sul.</p></div></section>
@@ -898,7 +903,7 @@ footer .foot{
 </div></section>
 </main>
 
-<footer><div class="wrap foot"><img src="assets/simbolos/prevencao-combate-fab.webp" alt="Prevenir, Combater, Salvar"><div><b>Rosenbauer Panther 4×4 • SESCINC</b><br><span>Experiência interativa para apresentação pública da viatura.</span></div></div></footer>
+<footer><div class="wrap foot"><img src="assets/simbolos/prevencao-combate-fab.webp" alt="Prevenir, Combater, Salvar"><div><b>Rosenbauer Panther 4×4 • SESCINC</b><br><span>Experiência interativa para apresentação pública da viatura.</span><div class="visit-counter" id="visitCounter" aria-live="polite">Visitas hoje: <span id="visitCount">...</span><small>Total diário registrado online</small></div></div></div></footer>
 
 <div class="modal" id="componentModal" aria-hidden="true"><button class="close" data-close>×</button><div class="modal-card"><img id="mImg" alt=""><div class="modal-body"><h3 id="mTitle"></h3><div class="big" id="mBig"></div><p id="mText"></p></div></div></div>
 <div class="modal photo-modal" id="photoModal" aria-hidden="true"><button class="close" data-close>×</button><img id="fullImg" alt="Foto ampliada"></div>
@@ -1268,6 +1273,34 @@ document.addEventListener('click',function(e){
 <div class="mobile-homebar"><button type="button" data-go-home>⌂ Voltar ao menu</button></div>
 
 <script>
+(() => {
+  const VISIT_COUNTER_URL = 'https://script.google.com/macros/s/AKfycbwiDw8BBmJh6T45ulwQ24g9JmSKVjLB7P6cKpCMhhMlOGNxPbp_7CsQGDRt1vZk5SxFGA/exec';
+  const counter = document.getElementById('visitCounter');
+  const count = document.getElementById('visitCount');
+  if (!VISIT_COUNTER_URL || !counter || !count) return;
+
+  const todayKey = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' });
+  const countedKey = 'panther-visit-counted-' + todayKey;
+  const shouldCount = sessionStorage.getItem(countedKey) !== '1';
+  const url = new URL(VISIT_COUNTER_URL);
+  url.searchParams.set('action', shouldCount ? 'hit' : 'read');
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 3500);
+
+  fetch(url.toString(), { cache: 'no-store', signal: controller.signal })
+    .then(response => response.ok ? response.json() : Promise.reject())
+    .then(data => {
+      const total = Number(data.today || data.total || data.visits);
+      if (!Number.isFinite(total)) return;
+      if (shouldCount) sessionStorage.setItem(countedKey, '1');
+      count.textContent = total.toLocaleString('pt-BR');
+      counter.classList.add('is-visible');
+    })
+    .catch(() => {})
+    .finally(() => clearTimeout(timer));
+})();
+
 document.addEventListener('DOMContentLoaded', function(){
   const frameShutter = document.getElementById('frameShutter');
   const takeSelfie = document.getElementById('takeSelfie');
