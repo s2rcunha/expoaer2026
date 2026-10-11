@@ -474,6 +474,36 @@ code,pre,.technical-break{
   .hero-service-title{-webkit-text-stroke:1.25px #b20d16}
 }
 
+
+/* ===== V5.23 — comparações, Desafio Panther, selfie e compartilhamento ===== */
+.hero-equivalent{display:inline-block;margin-top:10px}
+.number-card .number-equivalent{margin-top:auto}
+.selfie-placeholder{line-height:1.15!important;gap:3px;padding:5px!important}
+.selfie-placeholder .selfie-align-icon{display:block;font-size:clamp(.8rem,3vw,1.25rem);line-height:1}
+.selfie-placeholder b{font-size:clamp(.46rem,1.9vw,.7rem);line-height:1.05}
+.selfie-zoom-step{
+  flex:0 0 38px;width:38px;height:38px;border-radius:50%;
+  border:1px solid #ffffff35;background:#ffffff12;color:#fff;
+  font-size:1.45rem;font-weight:900;line-height:1;cursor:pointer;
+}
+.selfie-zoom-step:active{transform:scale(.94)}
+.quiz-rank{margin:18px 0 6px;padding:18px;border:1px solid #ffffff24;border-radius:18px;background:#0b2135;text-align:center}
+.quiz-rank .rank-icon{font-size:2.5rem;display:block;margin-bottom:6px}
+.quiz-rank strong{display:block;font-size:1.35rem;color:var(--yellow)}
+.quiz-rank p{margin:7px 0 0}
+.share-panther{
+  display:block;margin:18px auto 0;min-height:48px;padding:11px 20px;
+  border-radius:15px;border:1px solid #ffffff2e;background:#102b45;color:#fff;
+  font:inherit;font-weight:900;cursor:pointer;
+}
+.share-panther:active{transform:scale(.98)}
+.share-status{text-align:center;min-height:1.4em;margin-top:7px;font-size:.88rem;opacity:.82}
+@media(max-width:430px){
+  .selfie-zoom-row{gap:7px}
+  .selfie-zoom-step{flex-basis:34px;width:34px;height:34px}
+  .selfie-zoom-value{min-width:42px}
+}
+
 </style>
 </head>
 <body>
@@ -500,6 +530,8 @@ code,pre,.technical-break{
       <button class="home-choice" data-open-section="selfie"><b>🤳 Selfie EXPOAER</b><span>Coloque seu rosto no bombeiro e salve a lembrança.</span></button>
       <button class="home-choice" data-open-section="expoaer"><b>🛡️ Nosso time</b><span>Conheça o efetivo preparado para a EXPOAER 2026.</span></button>
     </div>
+    <button class="share-panther" id="sharePanther" type="button">↗ Compartilhar o Panther</button>
+    <div class="share-status" id="shareStatus" aria-live="polite"></div>
   </div>
 </section>
 
@@ -566,7 +598,7 @@ code,pre,.technical-break{
       <div class="number-hero-main">
         <span class="number-icon">🚒</span>
         <div><strong>23.977</strong><b>kg</b></div>
-        <p>Peso bruto veicular permitido</p>
+        <p>Peso bruto veicular permitido</p><span class="number-equivalent hero-equivalent">≈ 24 toneladas</span>
       </div>
       <div class="number-hero-side">
         <div><strong>10,34 m</strong><span>comprimento</span></div>
@@ -588,7 +620,7 @@ code,pre,.technical-break{
         <span class="number-card-icon">🫧</span>
         <strong>757 L</strong>
         <b>LGE</b>
-        <p>Concentrado gerador de espuma para o combate a incêndios.</p>
+        <p>Concentrado gerador de espuma para o combate a incêndios.</p><span class="number-equivalent">≈ 3,8 tambores de 200 L</span>
       </article>
       <article class="number-card">
         <span class="number-card-icon">⚙️</span>
@@ -601,13 +633,13 @@ code,pre,.technical-break{
         <span class="number-card-icon">🎯</span>
         <strong>3.028 L/min</strong>
         <b>Canhão superior</b>
-        <p>Vazão máxima a 10 bar, com alcance aproximado de 60 metros.</p>
+        <p>Vazão máxima a 10 bar, com alcance aproximado de 60 metros.</p><span class="number-equivalent">≈ 50,5 L por segundo</span>
       </article>
       <article class="number-card">
         <span class="number-card-icon">🧯</span>
         <strong>227 kg</strong>
         <b>Pó químico</b>
-        <p>Agente extintor transportado pelo sistema hidroquímico.</p>
+        <p>Agente extintor transportado pelo sistema hidroquímico.</p><span class="number-equivalent">≈ 11 sacos de 20 kg</span>
       </article>
       <article class="number-card">
         <span class="number-card-icon">🛡️</span>
@@ -664,9 +696,9 @@ code,pre,.technical-break{
 <button class="slide" type="button" data-img="assets/fotos/foto-13.webp" aria-label="Ampliar foto 13"><img loading="lazy" src="assets/fotos/foto-13.webp" alt="Rosenbauer Panther e viaturas do SESCINC — foto 13"></button><button class="slide" type="button" data-img="assets/fotos/foto-14.webp"><img loading="lazy" src="assets/fotos/foto-14.webp" alt="Rosenbauer Panther com equipamentos de combate a incêndio"></button></div></div><div class="hint">← deslize para explorar →</div></div></section>
 
 <section class="flood-section" id="enchente"><div class="wrap flood-grid"><div class="flood-copy"><div class="year">2024</div><h2>Enchente no Rio Grande do Sul</h2><p>Durante as enchentes de 2024, o Panther e o efetivo atuaram também em apoio aos resgates. A capacidade de deslocamento da viatura em áreas alagadas ajudou a levar equipes e apoiar pessoas em locais atingidos pela inundação.</p><p class="sub">Toque nas imagens para ampliar.</p></div><div class="flood-photos"><button class="flood-photo" type="button" data-img="assets/enchente/enchente-2024-01.webp"><img loading="lazy" src="assets/enchente/enchente-2024-01.webp" alt="Atuação durante as enchentes de 2024"></button>
-<button class="flood-photo" type="button" data-img="assets/enchente/enchente-2024-02.webp"><img loading="lazy" src="assets/enchente/enchente-2024-02.webp" alt="Atuação durante as enchentes de 2024"></button></div></div><div class="flood-video-block"><h3>🎥 Enchente 2024 em vídeo</h3><div class="youtube-shell"><iframe src="https://www.youtube-nocookie.com/embed/suCMVHjF5y4?rel=0" title="Enchente no Rio Grande do Sul — 2024" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p>Registros da atuação durante as enchentes de 2024 no Rio Grande do Sul.</p></div></section>
+<button class="flood-photo" type="button" data-img="assets/enchente/enchente-2024-02.webp"><img loading="lazy" src="assets/enchente/enchente-2024-02.webp" alt="Atuação durante as enchentes de 2024"></button></div></div><div class="flood-video-block"><h3>🎥 Enchente 2024 em vídeo</h3><div class="youtube-shell"><iframe src="https://www.youtube-nocookie.com/embed/Yv9OmzixAS0?rel=0" title="Enchente no Rio Grande do Sul — 2024" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p>Registros da atuação durante as enchentes de 2024 no Rio Grande do Sul.</p></div></section>
 
-<section id="quiz"><div class="section-back wrap"><button type="button" data-go-home>← Voltar ao início</button></div><div class="wrap"><h2>Teste seus conhecimentos</h2><div class="quiz"><div id="q"></div><div class="answers" id="answers"></div><div id="feedback" aria-live="polite"></div><button id="next" class="ans" style="display:none">Próxima pergunta →</button></div></div></section>
+<section id="quiz"><div class="section-back wrap"><button type="button" data-go-home>← Voltar ao início</button></div><div class="wrap"><span class="eyebrow">DESAFIO PANTHER</span><h2>Teste seus conhecimentos</h2><p class="sub">Responda às perguntas e descubra sua classificação no final.</p><div class="quiz"><div id="q"></div><div class="answers" id="answers"></div><div id="feedback" aria-live="polite"></div><button id="next" class="ans" style="display:none">Próxima pergunta →</button></div></div></section>
 
 
 <section class="selfie-section" id="selfie"><div class="section-back wrap"><button type="button" data-go-home>← Voltar ao início</button></div>
@@ -676,7 +708,7 @@ code,pre,.technical-break{
       <p class="sub" style="margin-inline:auto">Ative a câmera frontal, enquadre seu rosto no capacete e registre sua foto como bombeiro por um dia.</p>
     </div>
     <div class="selfie-stage" id="selfieStage">
-      <div class="selfie-placeholder" id="selfiePlaceholder">Seu rosto<br>aparece aqui</div>
+      <div class="selfie-placeholder" id="selfiePlaceholder"><span class="selfie-align-icon">🙂</span><b>Posicione o rosto aqui</b></div>
       <video class="selfie-camera" id="selfieVideo" playsinline muted></video>
       <img class="frame" id="selfieFrame" src="assets/selfie/moldura-selfie-expoaer-2026.webp" alt="Moldura de selfie EXPOAER 2026 com bombeiro e viaturas">
       <button class="selfie-frame-shutter" id="frameShutter" type="button"
@@ -690,7 +722,9 @@ code,pre,.technical-break{
     <div class="selfie-zoom-control" id="selfieZoomControl">
       <div class="selfie-zoom-row">
         <label for="selfieZoom">Zoom</label>
+        <button class="selfie-zoom-step" id="zoomMinus" type="button" aria-label="Diminuir zoom">−</button>
         <input id="selfieZoom" type="range" min="1" max="4" step="0.1" value="2.2" aria-label="Zoom da câmera traseira">
+        <button class="selfie-zoom-step" id="zoomPlus" type="button" aria-label="Aumentar zoom">+</button>
         <span class="selfie-zoom-value" id="selfieZoomValue">2.2×</span>
       </div>
       <small class="selfie-zoom-hint" id="selfieZoomHint">Ajuste a aproximação antes de tirar a foto.</small>
@@ -746,8 +780,35 @@ function closeAll(){document.querySelectorAll('.modal.open').forEach(x=>{x.class
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closeAll));document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeAll()}));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
 const quiz=[['Quantos litros de água o Panther transporta?',['3.000 L','5.700 L','8.000 L'],1],['Qual é a vazão da bomba R600?',['1.135 L/min','3.028 L/min','6.000 L/min'],2],['Qual é o alcance aproximado do canhão superior?',['30 m','45 m','60 m'],2],['Quanto pó químico é transportado?',['100 kg','227 kg','500 kg'],1]];
 let qi=0,score=0;const q=document.getElementById('q'),aa=document.getElementById('answers'),fb=document.getElementById('feedback'),nx=document.getElementById('next');
-function renderQ(){let x=quiz[qi];q.innerHTML=`<b>Pergunta ${qi+1} de ${quiz.length}</b><h3>${x[0]}</h3>`;aa.innerHTML='';fb.textContent='';nx.style.display='none';x[1].forEach((t,i)=>{let b=document.createElement('button');b.className='ans';b.textContent=t;b.onclick=()=>{[...aa.children].forEach(z=>z.disabled=true);if(i===x[2]){score++;fb.textContent='✓ Correto!'}else fb.textContent='Resposta: '+x[1][x[2]];nx.style.display='block'};aa.appendChild(b)})}
-nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você acertou ${score} de ${quiz.length}!</h3>`;aa.innerHTML='';fb.textContent=score===quiz.length?'Excelente! Você conhece o Panther.':'Explore a página e tente novamente.';nx.textContent='Refazer quiz';nx.style.display='block';nx.onclick=()=>location.reload()}};renderQ();
+function renderQ(){
+  let x=quiz[qi];
+  q.innerHTML=`<b>Pergunta ${qi+1} de ${quiz.length}</b><h3>${x[0]}</h3>`;
+  aa.innerHTML='';fb.textContent='';nx.style.display='none';nx.textContent='Próxima pergunta →';
+  x[1].forEach((t,i)=>{
+    let b=document.createElement('button');b.className='ans';b.textContent=t;
+    b.onclick=()=>{
+      [...aa.children].forEach(z=>z.disabled=true);
+      if(i===x[2]){score++;fb.textContent='✓ Correto!'}else fb.textContent='Resposta: '+x[1][x[2]];
+      nx.style.display='block';
+    };
+    aa.appendChild(b);
+  });
+}
+function challengeRank(points){
+  if(points===quiz.length) return ['🏆','Especialista Panther','Você dominou o desafio e conhece muito bem a viatura!'];
+  if(points>=3) return ['🧑‍🚒','Bombeiro','Ótimo resultado! Você já conhece os principais recursos do Panther.'];
+  if(points>=2) return ['🚒','Recruta','Bom começo! Explore mais o Panther e tente chegar ao topo.'];
+  return ['👋','Visitante','A missão começou! Explore o site, descubra o Panther e tente novamente.'];
+}
+function finishQuiz(){
+  const r=challengeRank(score);
+  q.innerHTML=`<h3>Você acertou ${score} de ${quiz.length}!</h3><div class="quiz-rank"><span class="rank-icon">${r[0]}</span><strong>${r[1]}</strong><p>${r[2]}</p></div>`;
+  aa.innerHTML='';fb.textContent='';
+  nx.textContent='↻ Jogar novamente';nx.style.display='block';
+  nx.onclick=()=>{qi=0;score=0;nx.onclick=nextQuestion;renderQ()};
+}
+function nextQuestion(){qi++;if(qi<quiz.length)renderQ();else finishQuiz()}
+nx.onclick=nextQuestion;renderQ();
 
 /* ===== Câmera/selfie EXPOAER ===== */
 (() => {
@@ -763,6 +824,8 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
  const zoomSlider=document.getElementById('selfieZoom');
  const zoomValue=document.getElementById('selfieZoomValue');
  const zoomHint=document.getElementById('selfieZoomHint');
+ const zoomMinus=document.getElementById('zoomMinus');
+ const zoomPlus=document.getElementById('zoomPlus');
  let stream=null;
  let facing='user';
  let rearZoom=2.2;
@@ -926,6 +989,23 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
  }
 
 
+
+ async function stepRearZoom(direction){
+   const min=parseFloat(zoomSlider.min)||1, max=parseFloat(zoomSlider.max)||4;
+   const step=parseFloat(zoomSlider.step)||0.1;
+   rearZoom=Math.max(min,Math.min(max,rearZoom+(direction*step)));
+   zoomSlider.value=rearZoom;
+   updateZoomLabel();
+   if(hardwareZoom){
+     await applyRearZoom();
+     video.style.transform='none';
+   }else if(facing==='environment'){
+     video.style.transform='scale('+rearZoom+')';
+   }
+ }
+ zoomMinus.addEventListener('click',()=>stepRearZoom(-1));
+ zoomPlus.addEventListener('click',()=>stepRearZoom(1));
+
  zoomSlider.addEventListener('input', async ()=>{
    rearZoom=parseFloat(zoomSlider.value)||1;
    updateZoomLabel();
@@ -944,6 +1024,24 @@ nx.onclick=()=>{qi++;if(qi<quiz.length)renderQ();else{q.innerHTML=`<h3>Você ace
  window.addEventListener('pagehide',()=>{if(stream)stream.getTracks().forEach(t=>t.stop())});
 })();
 
+
+
+/* ===== Compartilhar o Panther ===== */
+(() => {
+ const btn=document.getElementById('sharePanther');
+ const status=document.getElementById('shareStatus');
+ if(!btn) return;
+ btn.addEventListener('click',async()=>{
+   const data={title:'Rosenbauer Panther 4×4 • SESCINC',text:'Conheça o Rosenbauer Panther 4×4 do SESCINC.',url:location.href.split('#')[0]};
+   if(navigator.share){
+     try{await navigator.share(data);status.textContent='Compartilhamento aberto.'}
+     catch(e){if(!e || e.name!=='AbortError') status.textContent='Não foi possível compartilhar neste navegador.'}
+   }else if(navigator.clipboard && window.isSecureContext){
+     try{await navigator.clipboard.writeText(data.url);status.textContent='Link copiado!'}
+     catch(e){status.textContent='Copie o endereço do navegador para compartilhar.'}
+   }else status.textContent='Copie o endereço do navegador para compartilhar.';
+ });
+})();
 
 /* ===== Seções sob demanda ===== */
 (() => {
