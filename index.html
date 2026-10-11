@@ -539,6 +539,40 @@ code,pre,.technical-break{
   .selfie-feature-badge{font-size:.58rem}
 }
 
+
+/* ===== V5.27 — CTA principal da selfie e correções mobile ===== */
+.selfie-main-cta{
+  width:100%;max-width:760px;margin:0 auto 24px;padding:16px 18px;
+  display:flex;align-items:center;gap:13px;text-align:left;
+  border:2px solid #ffd21a;border-radius:20px;
+  background:linear-gradient(135deg,#7b1018,#bd1d26);
+  color:#fff;box-shadow:0 12px 30px rgba(0,0,0,.3);
+  font:inherit;cursor:pointer;overflow:hidden;
+}
+.selfie-main-icon{flex:0 0 auto;font-size:2rem;line-height:1}
+.selfie-main-copy{display:flex;flex:1 1 auto;min-width:0;flex-direction:column;gap:3px}
+.selfie-main-copy strong{color:#ffd21a;font-size:1.12rem;line-height:1.1;letter-spacing:.02em}
+.selfie-main-copy small{color:#fff;font-size:.88rem;line-height:1.25}
+.selfie-main-arrow{flex:0 0 auto;color:#ffd21a;font-size:2rem;font-weight:900;line-height:1}
+.selfie-main-cta:active{transform:scale(.985)}
+/* remove qualquer efeito antigo de selo/estrela */
+.selfie-feature-badge{display:none!important}
+.selfie-menu-back-visible{display:flex!important;justify-content:center!important;margin:12px auto 14px!important;position:relative!important;z-index:8!important}
+.selfie-menu-back-visible button{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  min-height:46px!important;padding:10px 18px!important;border-radius:14px!important;
+  border:1px solid rgba(255,255,255,.28)!important;background:#102b45!important;color:#fff!important;
+  font:inherit!important;font-weight:900!important;cursor:pointer!important;
+}
+.selfie-hashtag{margin:0 auto 10px!important}
+@media(max-width:600px){
+  .selfie-main-cta{margin-bottom:20px;padding:14px 13px;border-radius:17px;gap:10px}
+  .selfie-main-icon{font-size:1.7rem}
+  .selfie-main-copy strong{font-size:1rem}
+  .selfie-main-copy small{font-size:.78rem}
+  .selfie-main-arrow{font-size:1.7rem}
+}
+
 </style>
 </head>
 <body>
@@ -554,6 +588,11 @@ code,pre,.technical-break{
 
 <section class="section-home" id="inicio">
   <div class="wrap">
+    <button class="selfie-main-cta" type="button" data-open-section="selfie">
+      <span class="selfie-main-icon">🤳</span>
+      <span class="selfie-main-copy"><strong>SELFIE EXPOAER</strong><small>Coloque seu rosto no bombeiro e leve uma lembrança!</small></span>
+      <span class="selfie-main-arrow" aria-hidden="true">›</span>
+    </button>
     <h2>O que você quer conhecer?</h2>
     <p class="sub">Escolha uma opção:</p>
     <div class="home-menu">
@@ -562,7 +601,7 @@ code,pre,.technical-break{
       <button class="home-choice" data-open-section="fotos"><b>📷 Galeria</b><span>Veja as fotos da viatura e amplie em tela cheia.</span></button>
       <button class="home-choice" data-open-section="enchente"><b>🌊 Enchente 2024</b><span>Imagens da atuação do efetivo nos resgates.</span></button>
       <button class="home-choice" data-open-section="quiz"><b>🎯 Quiz</b><span>Teste o que você descobriu sobre o Panther.</span></button>
-      <button class="home-choice home-choice-selfie" data-open-section="selfie"><span class="selfie-feature-badge">⭐ DESTAQUE</span><b>🤳 Selfie EXPOAER</b><span>Coloque seu rosto no bombeiro e salve a lembrança.</span></button>
+      
       <button class="home-choice" data-open-section="expoaer"><b>🛡️ Nosso time</b><span>Conheça o efetivo preparado para a EXPOAER 2026.</span></button>
     </div>
     <button class="share-panther" id="sharePanther" type="button">↗ Compartilhar o Panther</button>
@@ -738,12 +777,13 @@ code,pre,.technical-break{
 
 <section class="selfie-section" id="selfie">
   <div class="wrap">
-    <div class="selfie-menu-back"><button type="button" data-go-home>← Voltar ao menu</button></div>
     <div class="selfie-intro">
       <h2>Leve uma lembrança da EXPOAER</h2>
       <p class="sub" style="margin-inline:auto">Ative a câmera frontal, enquadre seu rosto no capacete e registre sua foto como bombeiro por um dia.</p>
     </div>
-    <div class="selfie-stage" id="selfieStage">
+    <div class="selfie-menu-back selfie-menu-back-visible"><button type="button" data-go-home>⌂ Voltar ao menu</button></div>
+    <div class="selfie-hashtag"><strong>Vai postar?</strong><span>Adicione a hashtag <b>#bombeirosbaco</b></span></div>
+        <div class="selfie-stage" id="selfieStage">
       <div class="selfie-placeholder" id="selfiePlaceholder"><span class="selfie-align-icon">🙂</span><b>Posicione o rosto aqui</b></div>
       <video class="selfie-camera" id="selfieVideo" playsinline muted></video>
       <img class="frame" id="selfieFrame" src="assets/selfie/moldura-selfie-expoaer-2026.webp" alt="Moldura de selfie EXPOAER 2026 com bombeiro e viaturas">
@@ -766,8 +806,7 @@ code,pre,.technical-break{
       <small class="selfie-zoom-hint" id="selfieZoomHint">Ajuste a aproximação antes de tirar a foto.</small>
     </div>
     <div class="selfie-status" id="selfieStatus" aria-live="polite"></div>
-    <div class="selfie-hashtag"><strong>Vai postar?</strong><span>Adicione a hashtag <b>#bombeirosbaco</b></span></div>
-    <p class="selfie-note">A câmera só é usada no seu aparelho. A foto é montada no próprio navegador e não é enviada para o site. Em iPhone, após tocar em “Tirar foto”, use Compartilhar/Salvar Imagem se o navegador não fizer o download automaticamente.</p>
+<p class="selfie-note">A câmera só é usada no seu aparelho. A foto é montada no próprio navegador e não é enviada para o site. Em iPhone, após tocar em “Tirar foto”, use Compartilhar/Salvar Imagem se o navegador não fizer o download automaticamente.</p>
     <canvas id="selfieCanvas" hidden></canvas>
   </div>
 </section>
