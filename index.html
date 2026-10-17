@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#081c36" />
+  <title>Obrigado pela presença! | EXPOAER 2026</title>
+  <style>
+    :root { color-scheme: dark; font-family: 'Segoe UI', Arial, sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; min-height: 100svh; color: white; background: #09182a; }
+    .pagina {
+      isolation: isolate; min-height: 100vh; min-height: 100svh;
+      display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+      position: relative; overflow: hidden; padding: clamp(24px, 5vh, 56px) 20px;
+    }
+    .pagina::before { content: ''; position: absolute; inset: 0; z-index: -2;
+      background: url('foto-08.webp') center 53% / cover no-repeat; }
+    .pagina::after { content: ''; position: absolute; inset: 0; z-index: -1;
+      background: linear-gradient(180deg, rgba(3,14,30,.76) 0%, rgba(4,17,34,.37) 32%, rgba(5,16,30,.45) 56%, rgba(3,11,22,.88) 100%); }
+    .simbolos { display: flex; align-items: center; justify-content: center; gap: clamp(20px, 5vw, 75px); width: 100%; }
+    .simbolo { display: block; object-fit: contain; filter: drop-shadow(0 6px 15px rgba(0,0,0,.45)); }
+    .sescinc { width: clamp(100px, 16vw, 166px); height: clamp(125px, 20vw, 195px); }
+    .fab { width: clamp(145px, 23vw, 245px); max-height: 195px; }
+    .mensagem { text-align: center; width: min(100%, 1050px); margin: auto 0; padding: 48px 0 38px;
+      text-shadow: 0 4px 22px rgba(0,0,0,.85), 0 2px 5px rgba(0,0,0,.85); }
+    .tag { display: inline-block; font-size: clamp(.8rem, 1.7vw, 1.1rem); letter-spacing: .32em;
+      font-weight: 700; color: #ffd654; margin-bottom: 20px; }
+    h1 { margin: 0; font-size: clamp(2.25rem, 6vw, 5.3rem); font-weight: 850; line-height: 1.13; letter-spacing: -.035em; text-wrap: balance; }
+    h1 strong { color: #ffd454; font-weight: inherit; }
+    .linha { width: 90px; height: 4px; border-radius: 3px; background: #ffd454; margin: 30px auto; box-shadow: 0 0 22px rgba(255,212,84,.4); }
+    .despedida { margin: 0; font-size: clamp(1.7rem, 4vw, 3.7rem); font-weight: 650; }
+    footer { text-align: center; font-size: .8rem; letter-spacing: .18em; opacity: .8; text-shadow: 0 2px 8px #000; }
+    @media (max-width: 600px) {
+      .pagina { padding: 24px 15px 22px; }
+      .pagina::before { background-position: 52% center; }
+      .simbolos { gap: 12px; }
+      .sescinc { width: 100px; height: 130px; }
+      .fab { width: 150px; max-height: 132px; }
+      .mensagem { padding: 40px 0; }
+      .tag { letter-spacing: .22em; }
+      .linha { margin: 24px auto; }
+      footer { font-size: .66rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="pagina">
+    <header class="simbolos" aria-label="Símbolos institucionais">
+      <img class="simbolo sescinc" src="prevencao-combate-fab.webp" alt="Emblema SESCINC-CO" />
+      <img class="simbolo fab" src="sescinc-co.webp" alt="Símbolo Prevenir, Combater, Salvar - FAB" />
+    </header>
+    <section class="mensagem" aria-label="Mensagem de agradecimento">
+      <span class="tag">EXPOAER 2026</span>
+      <h1>Obrigado por terem vindo na <strong>EXPOAER 2026!</strong></h1>
+      <div class="linha" aria-hidden="true"></div>
+      <p class="despedida">Até a próxima!</p>
+    </section>
+    <footer>PREVENIR · COMBATER · SALVAR</footer>
+  </main>
+</body>
+</html>
